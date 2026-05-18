@@ -14,8 +14,10 @@
 
 ### Стилизация
 
-- **Tailwind CSS v4** — utility-first CSS
-- **@tailwindcss/typography** — стили для markdown (prose класс)
+- **SCSS** — препроцессор CSS (вложенность, переменные, миксины)
+- **CSS Modules** — изолированные стили для компонентов
+- **Tailwind CSS v4** (опционально) — utility-first CSS
+- **@tailwindcss/typography** (опционально) — стили для markdown (prose класс)
 
 ### Роутинг
 
@@ -147,10 +149,17 @@
 ## Что устанавливать СЕЙЧАС (только frontend)
 
 ```bash
-# В папке frontend/
+# Базовая установка (уже сделано)
 npm create vite@latest . -- --template react-ts
 npm install
+
+# Зависимости
 npm install react-router-dom axios react-markdown
+
+# SCSS
+npm install -D sass
+
+# Tailwind (опционально, если захочешь)
 npm install -D tailwindcss @tailwindcss/typography postcss autoprefixer
 npx tailwindcss init -p
 ```
