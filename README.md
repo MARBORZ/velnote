@@ -1,75 +1,115 @@
-# React + TypeScript + Vite
+# Notes App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Fullstack приложение для создания заметок с тегами, поиском и markdown-рендером.
 
-Currently, two official plugins are available:
+**Тренировочный проект БЕЗ AI** — код написан самостоятельно для калибровки реального уровня.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Суть проекта
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Веб-приложение для управления заметками:
 
-Note: This will impact Vite dev & build performances.
+- Создание, редактирование, удаление заметок
+- Markdown поддержка (пиши в markdown, рендерится красиво)
+- Система тегов (many-to-many связь в БД)
+- Поиск по тексту и фильтр по тегам
+- JWT авторизация (регистрация + логин)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Для чего
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. **Калибровка навыков** — проверить реальный уровень без помощи AI
+2. **Fullstack опыт** — React + Express + PostgreSQL в одном проекте
+3. **Реляционная БД** — many-to-many связи, JOIN запросы, транзакции
+4. **Портфолио** — реальный проект с деплоем
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Стек
+
+### Frontend
+
+- React 19
+- TypeScript
+- Tailwind CSS v4
+- React Router (защищённые роуты)
+- react-markdown (рендер markdown)
+- axios (HTTP запросы)
+
+### Backend
+
+- Node.js + Express
+- TypeScript
+- PostgreSQL (через pg)
+- JWT (авторизация)
+- bcrypt (хеширование паролей)
+
+### Деплой
+
+- Frontend: Vercel
+- Backend: Render
+- БД: Render PostgreSQL (бесплатный tier)
+
+---
+
+## Функционал
+
+### Авторизация
+
+- Регистрация (email + password)
+- Логин (JWT токен)
+- Защищённые роуты
+
+### Заметки
+
+- Создать заметку (title + markdown content + теги)
+- Просмотр заметки (markdown рендер)
+- Редактировать заметку
+- Удалить заметку
+- Список всех заметок
+
+### Теги
+
+- Добавить теги к заметке
+- Автокомплит при вводе тега
+- Фильтр заметок по тегу
+
+### Поиск
+
+- Fulltext поиск по title и content
+- Фильтр по тегу
+
+---
+
+## Структура проекта
+
+```
+notes-app/
+├── frontend/          — React приложение
+├── backend/           — Express API
+└── README.md          — этот файл
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Статус
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+🚧 В разработке
+
+**Текущий этап:** Настройка проекта
+
+---
+
+## Дедлайн
+
+Июнь-Август 2026
+
+---
+
+## Принцип
+
+**Принцип #3:** 1 проект в год без AI — это тот самый проект.
+
+Код пишу сам. AI только объясняет концепции и помогает с отладкой.
