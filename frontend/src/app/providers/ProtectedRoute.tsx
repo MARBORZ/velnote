@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router";
-import { Layout } from "./Layout";
+import { Layout } from "./Layout/Layout";
 
 export function ProtectedRoute() {
   const token: string | null = localStorage.getItem("token");

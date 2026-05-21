@@ -1,0 +1,12 @@
+@use "../../app/styles/tokens" as *;
+
+.page {
+  padding: $space-8;
+  max-width: 95%;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
