@@ -1,0 +1,82 @@
+@use "../../app/styles/tokens" as *;
+
+.page {
+  background-color: $color-bg-secondary;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: $space-10;
+  border-radius: $radius-2xl;
+  box-shadow: 0 10px 40px -5px rgba(0, 0, 0, 0.18);
+  background-color: $color-bg;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: $space-6;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin-bottom: $space-5;
+
+  label {
+    font-size: $font-sm;
+    font-weight: $font-medium;
+    color: $color-text;
+  }
+}
+
+.input {
+  width: 100%;
+  padding: $space-3 $space-4;
+  border: 1.5px solid $color-border;
+  border-radius: $radius-lg;
+  font-size: $font-base;
+  background-color: $color-bg-secondary;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+
+  &:focus {
+    border-color: $color-primary;
+    background-color: $color-bg;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+  }
+}
+
+.button {
+  margin-top: $space-2;
+  padding: $space-3;
+  background-color: $color-primary;
+  color: $color-bg;
+  border-radius: $radius-lg;
+  font-size: $font-base;
+  font-weight: $font-semibold;
+  width: 100%;
+  // переопределяем сброс из global.scss
+  border: none;
+  background-clip: padding-box;
+  transition: background-color $transition-fast, transform $transition-fast;
+
+  &:hover {
+    background-color: $color-primary-hover;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.footer {
+  // переопределяем margin-bottom из global.scss для p
+  p {
+    margin-bottom: 0;
+    margin-top: $space-4;
+    font-size: $font-sm;
+    text-align: center;
+  }
+}

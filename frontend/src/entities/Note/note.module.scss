@@ -1,0 +1,56 @@
+@use "../../app/styles/tokens" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-5;
+  border-radius: $radius-xl;
+  border: 1px solid $color-border;
+  background-color: $color-bg;
+  box-shadow: $shadow-sm;
+  cursor: pointer;
+  transition: box-shadow $transition-fast, border-color $transition-fast;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    border-color: $color-border-hover;
+  }
+}
+
+.title {
+  font-size: $font-lg;
+  font-weight: $font-semibold;
+  color: $color-text;
+}
+
+.preview {
+  font-size: $font-sm;
+  color: $color-text-secondary;
+  line-height: $line-relaxed;
+
+  // переопределяем margin-bottom из global.scss
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.tag {
+  font-size: $font-xs;
+  font-weight: $font-medium;
+  padding: $space-1 $space-2;
+  border-radius: $radius-full;
+  background-color: $color-bg-tertiary;
+  color: $color-text-secondary;
+}
+
+.date {
+  font-size: $font-xs;
+  color: $color-text-tertiary;
+}
