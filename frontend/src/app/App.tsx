@@ -1,11 +1,11 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
-import { Login } from "../pages/Login";
-import { Notes } from "../pages/Notes";
-import { Register } from "../pages/Register";
-import { NewNote } from "../pages/NewNote";
-import { EditNote } from "../pages/EditNote";
-import { ViewNote } from "../pages/ViewNote";
-import { ProtectedRoute } from "./providers/ProtectedRoute";
+import { Login } from "@/pages/Login";
+import { Notes } from "@/pages/Notes";
+import { Register } from "@/pages/Register";
+import { NewNote } from "@/pages/NewNote";
+import { EditNote } from "@/pages/EditNote";
+import { ViewNote } from "@/pages/ViewNote";
+import { ProtectedRoute } from "@/app/providers/ProtectedRoute";
 
 export function App() {
   return (
