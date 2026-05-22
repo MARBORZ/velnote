@@ -1,56 +1,25 @@
-@use "../../app/styles/tokens" as *;
+@use "tokens" as *;
 
 .card {
-  display: flex;
-  flex-direction: column;
-  gap: $space-3;
-  padding: $space-5;
-  border-radius: $radius-xl;
   border: 1px solid $color-border;
-  background-color: $color-bg;
+  border-radius: $radius-xl;
   box-shadow: $shadow-sm;
-  cursor: pointer;
-  transition: box-shadow $transition-fast, border-color $transition-fast;
+  transition: box-shadow $transition-base, transform $transition-base;
 
   &:hover {
     box-shadow: $shadow-md;
-    border-color: $color-border-hover;
+    transform: translateY(-2px);
   }
 }
 
-.title {
-  font-size: $font-lg;
-  font-weight: $font-semibold;
-  color: $color-text;
-}
+.title { color: $color-text; }
 
-.preview {
-  font-size: $font-sm;
-  color: $color-text-secondary;
-  line-height: $line-relaxed;
-
-  // переопределяем margin-bottom из global.scss
-  p {
-    margin-bottom: 0;
-  }
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $space-2;
-}
+.preview { color: $color-text-secondary; }
 
 .tag {
-  font-size: $font-xs;
-  font-weight: $font-medium;
-  padding: $space-1 $space-2;
-  border-radius: $radius-full;
-  background-color: $color-bg-tertiary;
+  background: $color-bg-tertiary;
   color: $color-text-secondary;
+  border-radius: $radius-full;
 }
 
-.date {
-  font-size: $font-xs;
-  color: $color-text-tertiary;
-}
+.date { color: $color-text-tertiary; }

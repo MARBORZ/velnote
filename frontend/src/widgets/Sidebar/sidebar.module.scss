@@ -1,98 +1,39 @@
-@use "../../app/styles/tokens" as *;
+@use "tokens" as *;
 
 .sidebar {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 240px;
-  background-color: $color-bg-secondary;
-  border-right: 2px solid $color-border;
-  box-shadow: $shadow-md;
-  flex-shrink: 0;
-}
-
-.nav {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: $space-6;
+  border-right: 1px solid $color-border;
 }
 
 .logo {
-  font-size: $font-xl;
-  font-weight: $font-bold;
   color: $color-text;
-  margin-bottom: $space-8;
+  transition: color $transition-fast;
 
-  &:hover {
-    color: $color-primary;
-  }
+  &:hover { color: $color-primary; }
 }
 
-.links {
-  display: flex;
-  flex-direction: column;
-  gap: $space-4;
-  flex: 1;
+.link {
+  color: $color-text;
+  border-radius: $radius-md;
+  transition: background $transition-fast;
 
-  li {
-    list-style: none;
-  }
-
-  a {
-    display: block;
-    padding: $space-2 $space-3;
-    border-radius: $radius-md;
-    font-size: $font-xs;
-    font-weight: $font-medium;
-    color: $color-text-secondary;
-    background-color: $color-bg;
-    text-align: center;
-    transition: background-color $transition-fast, color $transition-fast;
-
-    &:hover {
-      background-color: $color-border;
-      color: $color-primary;
-    }
-  }
+  &:hover { background: $color-bg-secondary; }
 }
 
-.bottom {
-  display: flex;
-  flex-direction: column;
-  gap: $space-2;
+.settings {
+  color: $color-text-secondary;
+  border-radius: $radius-md;
+  transition: background $transition-fast;
 
-  a {
-    display: block;
-    padding: $space-2 $space-3;
-    border-radius: $radius-md;
-    font-size: $font-xs;
-    font-weight: $font-medium;
-    color: $color-text-secondary;
-    background-color: $color-bg;
-    text-align: center;
-    transition: background-color $transition-fast, color $transition-fast;
-
-    &:hover {
-      background-color: $color-border;
-      color: $color-primary;
-    }
-  }
+  &:hover { background: $color-bg-secondary; }
 }
 
 .logout {
-  padding: $space-2 $space-3;
-  border-radius: $radius-md;
-  font-size: $font-xs;
-  font-weight: $font-medium;
   color: $color-text-secondary;
-  background-color: $color-bg;
-  text-align: center;
-  width: 100%;
-  transition: background-color $transition-fast, color $transition-fast;
+  border-radius: $radius-md;
+  transition: background $transition-fast, color $transition-fast;
 
   &:hover {
-    background-color: $color-border;
     color: $color-error;
+    background: #fef2f2;
   }
 }

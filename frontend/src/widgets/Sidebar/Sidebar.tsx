@@ -3,22 +3,30 @@ import styles from "./sidebar.module.scss";
 
 export function Sidebar() {
   return (
-    <aside className={styles.sidebar}>
-      <nav className={styles.nav}>
-        <Link to="/" className={styles.logo}>
+    <aside className={`${styles.sidebar} sticky top-0 h-screen w-60 shrink-0`}>
+      <nav className="flex flex-col h-full px-4 py-6">
+        <Link to="/" className={`${styles.logo} text-lg font-bold mb-8 block`}>
           Notes App
         </Link>
-        <ul className={styles.links}>
+        <ul className="flex flex-col gap-1 flex-1">
           <li>
-            <Link to="/notes">Notes</Link>
+            <Link to="/notes" className={`${styles.link} block px-3 py-2`}>
+              Notes
+            </Link>
           </li>
           <li>
-            <Link to="/notes/new">New Note</Link>
+            <Link to="/notes/new" className={`${styles.link} block px-3 py-2`}>
+              New Note
+            </Link>
           </li>
         </ul>
-        <div className={styles.bottom}>
-            <Link to="/settings">Settings</Link>
-          <button className={styles.logout}>Logout</button>
+        <div className="flex flex-col gap-1 pt-4 border-t border-gray-200">
+          <Link to="/settings" className={`${styles.settings} block px-3 py-2 text-sm`}>
+            Settings
+          </Link>
+          <button className={`${styles.logout} px-3 py-2 text-left text-sm w-full cursor-pointer`}>
+            Logout
+          </button>
         </div>
       </nav>
     </aside>

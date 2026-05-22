@@ -1,8 +1,12 @@
 import { Link } from "react-router";
 
-export function BackArrow({ navigate }) {
+interface navigateProps {
+  navigate: string;
+}
+
+export function BackArrow({ navigate }: navigateProps) {
   return (
-    <Link to={`/${navigate}`}>
+    <Link className="fixed top-6 left-6 w-6 block hover:opacity-60 transition-opacity" to={`${navigate}`}>
       <svg
         viewBox="0 0 1024 1024"
         xmlns="http://www.w3.org/2000/svg"

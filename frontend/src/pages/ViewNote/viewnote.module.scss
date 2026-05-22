@@ -1,150 +1,40 @@
-@use "../../app/styles/tokens" as *;
-
-.page {
-  padding-inline: $space-8;
-  max-width: 860px;
-  margin: 0 auto;
-}
+@use "tokens" as *;
 
 .article {
-  display: flex;
-  flex-direction: column;
-  gap: $space-6;
-  background-color: $color-bg;
   border: 1px solid $color-border;
-  border-radius: $radius-2xl;
-  padding: $space-10;
-  box-shadow: $shadow-md;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-sm;
 }
 
-.title {
-  font-size: $font-3xl;
-  font-weight: $font-bold;
-  color: $color-text;
-  line-height: $line-tight;
-}
-
-.content {
-  font-size: $font-base;
-  color: $color-text;
-  line-height: $line-relaxed;
-
-  p {
-    margin-bottom: $space-4;
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  h2,
-  h3 {
-    font-weight: $font-semibold;
-    margin-top: $space-6;
-    margin-bottom: $space-3;
-    color: $color-text;
-  }
-
-  pre {
-    background-color: $color-bg-tertiary;
-    border: 1px solid $color-border;
-    border-radius: $radius-lg;
-    padding: $space-4;
-    overflow-x: auto;
-    margin-bottom: $space-4;
-  }
-
-  code {
-    font-family: $font-mono;
-    font-size: $font-sm;
-  }
-
-  blockquote {
-    border-left: 3px solid $color-primary;
-    padding-left: $space-4;
-    color: $color-text-secondary;
-    margin: $space-4 0;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: $space-4;
-
-    th,
-    td {
-      border: 1px solid $color-border;
-      padding: $space-2 $space-3;
-      text-align: left;
-    }
-
-    th {
-      background-color: $color-bg-tertiary;
-      font-weight: $font-semibold;
-    }
-  }
-}
-
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $space-2;
-}
+.title { color: $color-text; }
 
 .tag {
-  font-size: $font-xs;
-  font-weight: $font-medium;
-  padding: $space-1 $space-2;
-  border-radius: $radius-full;
-  background-color: $color-bg-tertiary;
+  background: $color-bg-tertiary;
   color: $color-text-secondary;
+  border-radius: $radius-full;
 }
 
-.date {
-  font-size: $font-xs;
-  color: $color-text-tertiary;
-}
-
-.actions {
-  display: flex;
-  gap: $space-3;
-}
+.date { color: $color-text-tertiary; }
 
 .editBtn {
-  padding: $space-2 $space-4;
-  border-radius: $radius-lg;
-  font-size: $font-sm;
-  font-weight: $font-medium;
-  background-color: $color-primary;
+  background: $color-primary;
   color: $color-bg;
-  transition: background-color $transition-fast;
+  border-radius: $radius-md;
+  font-weight: $font-medium;
+  transition: background $transition-fast;
 
-  &:hover {
-    color: $color-bg;
-    background-color: $color-primary-hover;
-  }
+  &:hover { background: $color-primary-hover; }
 }
 
 .deleteBtn {
-  padding: $space-2 $space-4;
-  border-radius: $radius-lg;
-  font-size: $font-sm;
-  font-weight: $font-medium;
-  background-color: $color-bg-tertiary;
+  border: 1px solid $color-border;
   color: $color-error;
-  transition: background-color $transition-fast;
+  border-radius: $radius-md;
+  font-weight: $font-medium;
+  transition: background $transition-fast, border-color $transition-fast;
 
   &:hover {
-    background-color: $color-border;
-  }
-}
-
-.back {
-  transition: filter $transition-base;
-  position: fixed;
-  margin-inline: 20px;
-  width: 25px;
-
-  &:hover {
-    filter: invert(0.5);
+    background: #fef2f2;
+    border-color: $color-error;
   }
 }

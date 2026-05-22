@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { Sidebar } from "@/widgets/Sidebar";
-import styles from "./layout.module.scss";
 
 interface LayoutProps {
   children?: ReactNode;
@@ -8,10 +7,10 @@ interface LayoutProps {
 
 export function Layout({ children }: LayoutProps) {
   return (
-    <div className={styles.wrapper}>
+    <div className="flex min-h-screen">
       <Sidebar />
-      <div className={styles.content}>
-        <main className={styles.main}>{children}</main>
+      <div className="flex-1 flex flex-col py-6 px-8">
+        <main className="flex-1">{children}</main>
       </div>
     </div>
   );

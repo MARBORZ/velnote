@@ -7,15 +7,17 @@ interface NoteCardProps {
 
 export function Note({ note }: NoteCardProps) {
   return (
-    <div className={styles.card}>
-      <h3 className={styles.title}>{note.title}</h3>
-      <p className={styles.preview}>{note.content.slice(0, 120)}...</p>
-      <div className={styles.tags}>
+    <div className={`${styles.card} flex flex-col gap-2 p-4 cursor-pointer`}>
+      <h3 className={`${styles.title} text-lg font-semibold`}>{note.title}</h3>
+      <p className={`${styles.preview} text-sm leading-relaxed`}>{note.content.slice(0, 120)}...</p>
+      <div className="flex flex-wrap gap-2">
         {note.tags.map((tag) => (
-          <span key={tag} className={styles.tag}>#{tag}</span>
+          <span key={tag} className={`${styles.tag} text-xs px-2 py-0.5`}>
+            #{tag}
+          </span>
         ))}
       </div>
-      <span className={styles.date}>{note.created_at.toLocaleDateString("ru-RU")}</span>
+      <span className={`${styles.date} text-xs`}>{note.created_at.toLocaleDateString("ru-RU")}</span>
     </div>
   );
 }
