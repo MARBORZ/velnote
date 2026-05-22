@@ -15,7 +15,7 @@ export function Note({ note }: NoteCardProps) {
           <span key={tag} className={styles.tag}>#{tag}</span>
         ))}
       </div>
-      <span className={styles.date}>{note.created_at.toLocaleDateString()}</span>
+      <span className={styles.date}>{note.created_at.toLocaleDateString("ru-RU")}</span>
     </div>
   );
 }

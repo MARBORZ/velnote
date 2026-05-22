@@ -138,11 +138,13 @@
   }
 }
 
-.text {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 100vh;
-  font-size: 75px;
+.back {
+  transition: filter $transition-base;
+  position: fixed;
+  margin-inline: 20px;
+  width: 25px;
+
+  &:hover {
+    filter: invert(0.5);
+  }
 }
