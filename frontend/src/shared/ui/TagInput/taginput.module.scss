@@ -1,0 +1,63 @@
+@use "tokens" as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: $space-2;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  margin-top: $space-1;
+  padding: $space-2 $space-4;
+  transition: border-color $transition-fast;
+  overflow-x: auto;
+
+  &:focus-within {
+    border-color: $color-primary;
+  }
+}
+
+.input {
+  flex: 1;
+  min-width: 120px;
+  border: none;
+  outline: none;
+  font-size: $font-sm;
+  color: $color-text;
+  background: transparent;
+
+  &::placeholder {
+    color: $color-text-tertiary;
+  }
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  font-size: $font-xs;
+  font-weight: $font-medium;
+  color: $color-primary;
+  background: $color-bg-secondary;
+  border-radius: $radius-full;
+  padding: 2px $space-3;
+  width: fit-content;
+  white-space: nowrap;
+}
+
+.warning {
+  display: block;
+  font-size: $font-xs;
+  color: $color-warning;
+  margin-top: $space-1;
+}
+
+.removeBtn {
+  color: $color-text-tertiary;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-error;
+  }
+}

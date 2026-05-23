@@ -14,7 +14,7 @@ export function Register() {
         <form className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
             <label htmlFor="email" className="text-sm font-medium">Email</label>
-            <input id="email" type="email" name="email" className={`${styles.input} w-full px-3 py-2`} />
+            <input id="email" type="email" name="email" autoComplete="email" className={`${styles.input} w-full px-3 py-2`} />
           </div>
 
           <div className="flex flex-col gap-1">
@@ -23,6 +23,7 @@ export function Register() {
               id="password"
               type="password"
               name="password"
+              autoComplete="new-password"
               className={`${styles.input} w-full px-3 py-2`}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -34,6 +35,7 @@ export function Register() {
               id="confirmPassword"
               type="password"
               name="confirmPassword"
+              autoComplete="new-password"
               className={`${styles.input} w-full px-3 py-2`}
               onChange={(e) => setCheckPassword(e.target.value)}
             />
