@@ -9,12 +9,12 @@ export function Login() {
         <form className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
             <label htmlFor="email" className="text-sm font-medium">Email</label>
-            <input id="email" type="email" name="email" className={`${styles.input} w-full px-3 py-2`} />
+            <input id="email" type="email" name="email" autoComplete="email" className={`${styles.input} w-full px-3 py-2`} />
           </div>
 
           <div className="flex flex-col gap-1">
             <label htmlFor="password" className="text-sm font-medium">Password</label>
-            <input id="password" type="password" name="password" className={`${styles.input} w-full px-3 py-2`} />
+            <input id="password" type="password" name="password" autoComplete="current-password" className={`${styles.input} w-full px-3 py-2`} />
           </div>
 
           <div className="flex flex-col gap-3 mt-2">

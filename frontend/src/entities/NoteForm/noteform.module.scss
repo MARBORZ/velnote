@@ -1,0 +1,96 @@
+@use "tokens" as *;
+
+.article {
+  border: 1px solid $color-border;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-sm;
+}
+
+.titleInput {
+  font-size: $font-3xl;
+  font-weight: $font-bold;
+  color: $color-text;
+  border: none;
+  border-bottom: 1px solid $color-border;
+  transition: border-color $transition-fast;
+
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+  }
+
+  &::placeholder { color: $color-text-tertiary; }
+}
+
+.textarea {
+  font-family: $font-mono;
+  font-size: $font-sm;
+  color: $color-text;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  transition: border-color $transition-fast;
+
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+  }
+
+  &::placeholder { color: $color-text-tertiary; }
+}
+
+.saveBtn {
+  background: $color-primary;
+  color: $color-bg;
+  border-radius: $radius-md;
+  font-weight: $font-medium;
+  transition: background $transition-fast;
+
+  &:hover { background: $color-primary-hover; }
+}
+
+.cancelBtn {
+  border: 1px solid $color-border;
+  color: $color-text-secondary;
+  border-radius: $radius-md;
+  font-weight: $font-medium;
+  transition: background $transition-fast;
+
+  &:hover { background: $color-bg-secondary; }
+}
+
+.previewLabel { color: $color-text-secondary; }
+
+.previewBox {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $color-bg-secondary;
+  border-radius: $radius-md;
+  padding: $space-4;
+  height: 100%;
+}
+
+.tag {
+  font-size: $font-xs;
+  font-weight: $font-medium;
+  color: $color-primary;
+  background: $color-bg-secondary;
+  border-radius: $radius-full;
+  padding: 2px 10px;
+}
+
+.previewContent {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 25rem;
+}
+
+.tagContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: auto;
+  margin-top: $space-3;
+  max-width: $breakpoint-sm;
+  min-height: $space-16;
+}
+

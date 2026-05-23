@@ -18,7 +18,7 @@ export function ViewNote() {
 
   return (
     <>
-      <BackArrow navigate="/notes/" />
+      <BackArrow navigate="/notes" />
       <article className={`${styles.article} max-w-3xl mx-auto p-8 flex flex-col gap-4`}>
         <h1 className={`${styles.title} text-3xl font-bold`}>{note.title}</h1>
         <div className="prose">
