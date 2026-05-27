@@ -1,0 +1,54 @@
+@use "../../app/styles/tokens" as *;
+
+.wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.icon {
+  position: absolute;
+  left: $space-3;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  color: $color-text-tertiary;
+  pointer-events: none;
+  :global(html.dark) & { color: $dark-text-tertiary; }
+}
+
+.input {
+  width: 100%;
+  padding: $space-3 $space-4 $space-3 $space-8;
+  border: 1.5px solid $color-border;
+  border-radius: $radius-xl;
+  font-size: $font-sm;
+  background-color: $color-bg-secondary;
+  color: $color-text;
+  transition:
+    border-color $transition-fast,
+    box-shadow $transition-fast,
+    background-color $transition-fast;
+
+  &::placeholder {
+    color: $color-text-tertiary;
+  }
+
+  &:focus {
+    border-color: $color-primary;
+    background-color: $color-bg;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+  }
+
+  :global(html.dark) & {
+    background-color: $dark-bg-secondary;
+    color: $dark-text;
+    border-color: $dark-border;
+    &::placeholder { color: $dark-text-tertiary; }
+    &:focus {
+      border-color: $dark-primary;
+      background-color: $dark-bg-secondary;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    }
+  }
+}

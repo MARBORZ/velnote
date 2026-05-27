@@ -6,8 +6,16 @@ import { NewNote } from "@/pages/NewNote";
 import { EditNote } from "@/pages/EditNote";
 import { ViewNote } from "@/pages/ViewNote";
 import { ProtectedRoute } from "@/app/providers/ProtectedRoute";
+import { Settings } from "@/pages/Settings";
+import { useEffect } from "react";
 
 export function App() {
+  useEffect(() => {
+    if (localStorage.getItem("theme") === "dark") {
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -27,15 +35,9 @@ export function App() {
           <Route path="notes/new" element={<NewNote />} />
           <Route path="notes/:id" element={<ViewNote />} />
           <Route path="notes/:id/edit" element={<EditNote />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </BrowserRouter>
   );
 }
-
-// /login — форма входа
-// /register — форма регистрации
-// /notes — список всех заметок (главная страница после входа)
-// /notes/:id — просмотр одной заметки
-// /notes/:id/edit — редактирование заметки
-// /notes/new — создание новой заметки

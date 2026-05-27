@@ -12,9 +12,11 @@
   padding: $space-2 $space-4;
   transition: border-color $transition-fast;
   overflow-x: auto;
-
-  &:focus-within {
-    border-color: $color-primary;
+  &:focus-within { border-color: $color-primary; }
+  :global(html.dark) & {
+    background-color: transparent;
+    border-color: $dark-border;
+    &:focus-within { border-color: $dark-primary; }
   }
 }
 
@@ -26,9 +28,11 @@
   font-size: $font-sm;
   color: $color-text;
   background: transparent;
-
-  &::placeholder {
-    color: $color-text-tertiary;
+  &::placeholder { color: $color-text-tertiary; }
+  :global(html.dark) & {
+    color: $dark-text;
+    background: transparent;
+    &::placeholder { color: $dark-text-tertiary; }
   }
 }
 
@@ -44,6 +48,10 @@
   padding: 2px $space-3;
   width: fit-content;
   white-space: nowrap;
+  :global(html.dark) & {
+    background: $dark-bg-tertiary;
+    color: $dark-primary;
+  }
 }
 
 .warning {
@@ -56,8 +64,9 @@
 .removeBtn {
   color: $color-text-tertiary;
   transition: color $transition-fast;
-
-  &:hover {
-    color: $color-error;
+  &:hover { color: $color-error; }
+  :global(html.dark) & {
+    color: $dark-text-tertiary;
+    &:hover { color: $color-error; }
   }
 }

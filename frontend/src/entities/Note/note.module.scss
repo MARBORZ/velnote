@@ -10,16 +10,35 @@
     box-shadow: $shadow-md;
     transform: translateY(-2px);
   }
+
+  :global(html.dark) & {
+    background-color: $dark-bg-secondary;
+    border-color: $dark-border;
+    &:hover { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); }
+  }
 }
 
-.title { color: $color-text; }
+.title {
+  color: $color-text;
+  :global(html.dark) & { color: $dark-text; }
+}
 
-.preview { color: $color-text-secondary; }
+.preview {
+  color: $color-text-secondary;
+  :global(html.dark) & { color: $dark-text-secondary; }
+}
 
 .tag {
   background: $color-bg-tertiary;
   color: $color-text-secondary;
   border-radius: $radius-full;
+  :global(html.dark) & {
+    background: $dark-bg;
+    color: $dark-text-secondary;
+  }
 }
 
-.date { color: $color-text-tertiary; }
+.date {
+  color: $color-text-tertiary;
+  :global(html.dark) & { color: $dark-text-tertiary; }
+}

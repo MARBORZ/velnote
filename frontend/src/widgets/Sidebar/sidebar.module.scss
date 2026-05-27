@@ -2,38 +2,54 @@
 
 .sidebar {
   border-right: 1px solid $color-border;
+  :global(html.dark) & {
+    background-color: $dark-bg-secondary;
+    border-color: $dark-border;
+  }
 }
 
 .logo {
   color: $color-text;
   transition: color $transition-fast;
-
   &:hover { color: $color-primary; }
+  :global(html.dark) & { color: $dark-text; }
 }
 
 .link {
   color: $color-text;
   border-radius: $radius-md;
   transition: background $transition-fast;
-
   &:hover { background: $color-bg-secondary; }
+  :global(html.dark) & {
+    color: $dark-text;
+    &:hover { background: $dark-bg-tertiary; }
+  }
 }
 
 .settings {
   color: $color-text-secondary;
   border-radius: $radius-md;
   transition: background $transition-fast;
-
   &:hover { background: $color-bg-secondary; }
+  :global(html.dark) & {
+    color: $dark-text-secondary;
+    &:hover { background: $dark-bg-tertiary; }
+  }
 }
 
 .logout {
   color: $color-text-secondary;
   border-radius: $radius-md;
   transition: background $transition-fast, color $transition-fast;
-
   &:hover {
     color: $color-error;
-    background: #fef2f2;
+    background: rgba(239, 68, 68, 0.1);
+  }
+  :global(html.dark) & {
+    color: $dark-text-secondary;
+    &:hover {
+      color: $color-error;
+      background: rgba(239, 68, 68, 0.1);
+    }
   }
 }

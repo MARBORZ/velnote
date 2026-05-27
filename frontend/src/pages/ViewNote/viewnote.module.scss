@@ -4,17 +4,31 @@
   border: 1px solid $color-border;
   border-radius: $radius-xl;
   box-shadow: $shadow-sm;
+  :global(html.dark) & {
+    background-color: $dark-bg-secondary;
+    border-color: $dark-border;
+  }
 }
 
-.title { color: $color-text; }
+.title {
+  color: $color-text;
+  :global(html.dark) & { color: $dark-text; }
+}
 
 .tag {
   background: $color-bg-tertiary;
   color: $color-text-secondary;
   border-radius: $radius-full;
+  :global(html.dark) & {
+    background: $dark-bg-tertiary;
+    color: $dark-text-secondary;
+  }
 }
 
-.date { color: $color-text-tertiary; }
+.date {
+  color: $color-text-tertiary;
+  :global(html.dark) & { color: $dark-text-tertiary; }
+}
 
 .editBtn {
   background: $color-primary;
@@ -22,8 +36,12 @@
   border-radius: $radius-md;
   font-weight: $font-medium;
   transition: background $transition-fast;
-
   &:hover { background: $color-primary-hover; }
+  :global(html.dark) & {
+    background: $dark-primary;
+    color: #fff;
+    &:hover { background: $dark-primary-hover; }
+  }
 }
 
 .deleteBtn {
@@ -32,9 +50,15 @@
   border-radius: $radius-md;
   font-weight: $font-medium;
   transition: background $transition-fast, border-color $transition-fast;
-
   &:hover {
-    background: #fef2f2;
+    background: rgba(239, 68, 68, 0.1);
     border-color: $color-error;
+  }
+  :global(html.dark) & {
+    border-color: $dark-border;
+    &:hover {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: $color-error;
+    }
   }
 }
