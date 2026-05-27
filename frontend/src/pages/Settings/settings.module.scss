@@ -1,0 +1,155 @@
+@use "../../app/styles/tokens" as *;
+
+.page {
+  padding: $space-8;
+}
+
+.heading {
+  font-size: $font-2xl;
+  font-weight: $font-bold;
+  color: $color-text;
+  margin-bottom: $space-8;
+  :global(html.dark) & { color: $dark-text; }
+}
+
+.section {
+  margin-bottom: $space-6;
+}
+
+.sectionTitle {
+  font-size: $font-xs;
+  font-weight: $font-semibold;
+  color: $color-text-tertiary;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: $space-3;
+  :global(html.dark) & { color: $dark-text-tertiary; }
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  background-color: $color-bg;
+  border: 1px solid $color-border;
+  border-radius: $radius-xl;
+  padding: $space-4 $space-5;
+  :global(html.dark) & {
+    background-color: $dark-bg-secondary;
+    border-color: $dark-border;
+  }
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: $radius-full;
+  background-color: $color-primary;
+  color: $color-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-lg;
+  font-weight: $font-bold;
+  flex-shrink: 0;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.email {
+  font-size: $font-sm;
+  font-weight: $font-medium;
+  color: $color-text;
+  :global(html.dark) & { color: $dark-text; }
+}
+
+.role {
+  font-size: $font-xs;
+  color: $color-text-tertiary;
+  text-transform: capitalize;
+  :global(html.dark) & { color: $dark-text-tertiary; }
+}
+
+.settingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: $color-bg;
+  border: 1px solid $color-border;
+  border-radius: $radius-xl;
+  padding: $space-4 $space-5;
+  :global(html.dark) & {
+    background-color: $dark-bg-secondary;
+    border-color: $dark-border;
+  }
+}
+
+.settingLabel {
+  font-size: $font-sm;
+  font-weight: $font-medium;
+  color: $color-text;
+  margin-bottom: $space-1;
+  :global(html.dark) & { color: $dark-text; }
+}
+
+.settingDesc {
+  font-size: $font-xs;
+  color: $color-text-tertiary;
+  :global(html.dark) & { color: $dark-text-tertiary; }
+}
+
+.toggle {
+  width: 44px;
+  height: 24px;
+  border-radius: $radius-full;
+  background-color: $color-border;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  transition: background-color $transition-fast;
+  flex-shrink: 0;
+  &:hover { background-color: $color-border-hover; }
+  :global(html.dark) & {
+    background-color: $dark-border;
+    &:hover { background-color: $dark-border-hover; }
+  }
+}
+
+.toggleThumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: $radius-full;
+  background-color: $color-bg;
+  transition: transform $transition-fast;
+  box-shadow: $shadow-sm;
+  :global(html.dark) & { background-color: $dark-text; }
+}
+
+.active {
+  background-color: $color-primary !important;
+  .toggleThumb { transform: translateX(20px); }
+}
+
+.logoutBtn {
+  padding: $space-2 $space-4;
+  border-radius: $radius-lg;
+  font-size: $font-sm;
+  font-weight: $font-medium;
+  background-color: $color-bg-tertiary;
+  color: $color-error;
+  border: none;
+  cursor: pointer;
+  transition: background-color $transition-fast;
+  &:hover { background-color: $color-border; }
+  :global(html.dark) & {
+    background-color: $dark-bg-tertiary;
+    &:hover { background-color: $dark-border; }
+  }
+}

@@ -7,10 +7,6 @@ export interface Note {
   updated_at: Date;
 }
 
-export type Role = {
-  role: "user" | "admin";
-};
-
 export interface Tag {
   id: number;
   name: string;
@@ -19,5 +15,5 @@ export interface Tag {
 export interface User {
   id: number;
   email: string;
-  role: Role;
+  role: "user" | "admin";
 }
