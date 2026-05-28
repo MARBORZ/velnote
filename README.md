@@ -1,115 +1,115 @@
 # Notes App
 
-Fullstack приложение для создания заметок с тегами, поиском и markdown-рендером.
+A fullstack note-taking application with tags, search, and markdown rendering.
 
-**Тренировочный проект БЕЗ AI** — код написан самостоятельно для калибровки реального уровня.
-
----
-
-## Суть проекта
-
-Веб-приложение для управления заметками:
-
-- Создание, редактирование, удаление заметок
-- Markdown поддержка (пиши в markdown, рендерится красиво)
-- Система тегов (many-to-many связь в БД)
-- Поиск по тексту и фильтр по тегам
-- JWT авторизация (регистрация + логин)
+**Training project built WITHOUT AI** — code written independently to benchmark real skill level.
 
 ---
 
-## Для чего
+## What it does
 
-1. **Калибровка навыков** — проверить реальный уровень без помощи AI
-2. **Fullstack опыт** — React + Express + PostgreSQL в одном проекте
-3. **Реляционная БД** — many-to-many связи, JOIN запросы, транзакции
-4. **Портфолио** — реальный проект с деплоем
+A web app for managing personal notes:
+
+- Create, edit, and delete notes
+- Markdown support (write in markdown, renders beautifully)
+- Tag system (many-to-many relationship in the database)
+- Search by title and filter by tags
+- JWT authentication (register + login)
 
 ---
 
-## Стек
+## Why this project
+
+1. **Skill calibration** — measure real level without AI assistance
+2. **Fullstack experience** — React + Express + PostgreSQL in one project
+3. **Relational database** — many-to-many relations, JOIN queries, transactions
+4. **Portfolio** — real deployable project
+
+---
+
+## Stack
 
 ### Frontend
 
 - React 19
 - TypeScript
-- Tailwind CSS v4
-- React Router (защищённые роуты)
-- react-markdown (рендер markdown)
-- axios (HTTP запросы)
+- Tailwind CSS v4 + SCSS Modules
+- React Router v7 (protected routes)
+- react-markdown + remark-gfm
+- Feature-Sliced Design (FSD) architecture
 
 ### Backend
 
 - Node.js + Express
-- TypeScript
-- PostgreSQL (через pg)
-- JWT (авторизация)
-- bcrypt (хеширование паролей)
+- TypeScript (NodeNext, ES2022)
+- PostgreSQL (via pg)
+- JWT authentication
+- bcrypt (password hashing)
+- zod (request validation)
 
-### Деплой
+### Deploy
 
 - Frontend: Vercel
 - Backend: Render
-- БД: Render PostgreSQL (бесплатный tier)
+- Database: Render PostgreSQL (free tier)
 
 ---
 
-## Функционал
+## Features
 
-### Авторизация
+### Auth
+- Register (email + password)
+- Login (returns JWT token)
+- Protected routes
 
-- Регистрация (email + password)
-- Логин (JWT токен)
-- Защищённые роуты
+### Notes
+- Create a note (title + markdown content + tags)
+- View a note (markdown rendered)
+- Edit a note (live markdown preview)
+- Delete a note
+- List all notes
 
-### Заметки
+### Tags
+- Add tags to a note (max 5, lowercase, space to confirm)
+- Search notes by tag
 
-- Создать заметку (title + markdown content + теги)
-- Просмотр заметки (markdown рендер)
-- Редактировать заметку
-- Удалить заметку
-- Список всех заметок
-
-### Теги
-
-- Добавить теги к заметке
-- Автокомплит при вводе тега
-- Фильтр заметок по тегу
-
-### Поиск
-
-- Fulltext поиск по title и content
-- Фильтр по тегу
+### Search
+- Search by title and tags simultaneously
 
 ---
 
-## Структура проекта
+## Project Structure
 
 ```
 notes-app/
-├── frontend/          — React приложение
-├── backend/           — Express API
-└── README.md          — этот файл
+├── frontend/    — React app (FSD architecture)
+├── backend/     — Express REST API
+└── README.md
 ```
 
 ---
 
-## Статус
+## Status
 
-🚧 В разработке
+🚧 In development
 
-**Текущий этап:** Настройка проекта
+| Stage | Status |
+|---|---|
+| Frontend UI | ✅ Complete |
+| Backend (Express + mock data) | 🚧 In progress |
+| PostgreSQL integration | ⏳ Planned |
+| Deploy | ⏳ Planned |
 
 ---
 
-## Дедлайн
+## Timeline
 
-Июнь-Август 2026
+June – August 2026
 
 ---
 
-## Принцип
+## Principle
 
-**Принцип #3:** 1 проект в год без AI — это тот самый проект.
+**Rule #3:** One project per year without AI — this is that project.
 
-Код пишу сам. AI только объясняет концепции и помогает с отладкой.
+Code written by hand. AI only explains concepts and helps with debugging.
