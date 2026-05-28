@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    /* Target & Environment */
+    "target": "ES2022", // Node 20+ natively supports ES2022 features
+    "module": "NodeNext", // Standard for modern ESM-first Node applications
+    "moduleResolution": "NodeNext", // Strictly enforces Node's ESM resolution rules
+
+    /* Strictness & Safety */
+    "strict": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true, // Prevents errors when accessing missing array/object indices
+
+    /* Interop & Optimization */
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src"]
+}
