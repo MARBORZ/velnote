@@ -1,4 +1,4 @@
-import { type User, type Note } from "../types/index.types.js";
+import { type User, type Note } from "../types/index.js";
 
 export const users: User[] = [
   {
