@@ -1,6 +1,6 @@
-import type { Note } from "@/shared/types";
+import type { TNote } from "@/shared/types";
 
-export const mockData: Note[] = [
+export const mockData: TNote[] = [
   {
     id: 1,
     title: "Getting Started with React",

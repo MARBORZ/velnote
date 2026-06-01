@@ -1,8 +1,8 @@
-import type { Note } from "@/shared/types";
+import type { TNote } from "@/shared/types";
 import styles from "./note.module.scss";
 
 interface NoteCardProps {
-  note: Note;
+  note: TNote;
 }
 
 export function Note({ note }: NoteCardProps) {

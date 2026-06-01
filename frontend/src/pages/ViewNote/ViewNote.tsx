@@ -1,20 +1,31 @@
-import { mockData } from "@/shared/lib/mockData";
-import { useParams, Link } from "react-router";
+import { useParams, Link, useNavigate } from "react-router";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { NotFound } from "@/shared/ui/NotFound";
 import { BackArrow } from "@/shared/ui/BackArrow/BackArrow";
 import styles from "./viewnote.module.scss";
+import { useEffect, useState } from "react";
+import type { TNote } from "@/shared/types";
+import { notes_api } from "@/shared/api/notes";
 
 export function ViewNote() {
+  const navigate = useNavigate()
+
   const { id } = useParams();
-  const data = mockData;
+  const [note, setNote] = useState<TNote | null>(null)
+
+  useEffect(() => {
+    if (!id) return;
+    notes_api.getById(Number(id)).then(res => setNote(res.data.note))
+  }, [id])
 
   if (!id) return <NotFound />;
-
-  const note = data.find((e) => e.id === +id);
-
   if (!note) return <NotFound />;
+
+  const handleRemove = async () => {
+    await notes_api.remove(Number(id))
+    navigate('/notes')
+  }
 
   return (
     <>
@@ -36,7 +47,7 @@ export function ViewNote() {
           <Link to={`/notes/${note.id}/edit`} className={`${styles.editBtn} px-4 py-2 text-sm`}>
             Edit
           </Link>
-          <button className={`${styles.deleteBtn} px-4 py-2 text-sm cursor-pointer`}>
+          <button onClick={handleRemove} className={`${styles.deleteBtn} px-4 py-2 text-sm cursor-pointer`}>
             Delete
           </button>
         </div>

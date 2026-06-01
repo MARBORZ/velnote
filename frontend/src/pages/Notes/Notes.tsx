@@ -1,18 +1,24 @@
 // import { useState } from "react";
-import { mockData } from "@/shared/lib/mockData";
 import { Note } from "@/entities/Note";
 import { Link } from "react-router";
 import { SearchBar } from "@/widgets/SearchBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { notes_api } from "@/shared/api/notes";
+import type { TNote } from "@/shared/types";
+
 
 export function Notes() {
-  const notes = mockData;
+  const [notes, setNotes] = useState<TNote[]>([])
   const [search, setSearch] = useState("");
   const filteredNotes = notes.filter(
     (n) =>
       n.title.toLowerCase().includes(search.toLowerCase()) ||
-      n.tags.some((tag) => tag.toLowerCase().includes(search.toLowerCase())),
+      n.tags.some((tag: string) => tag.toLowerCase().includes(search.toLowerCase())),
   );
+
+  useEffect(() => {
+    notes_api.getAll().then(res => setNotes(res.data.notes))
+  }, [])
 
   return (
     <div className="max-w-3xl mx-auto">

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { type RequestHandler } from "express";
 import { notes } from "../data/mockData.js";
+import { noteSchema } from "../validators/schemas.js";
 
 export const notesRouter = Router();
 
@@ -14,7 +15,8 @@ notesRouter.get("/", getNotes);
 const getNote: RequestHandler = (req, res) => {
   const { id } = req.params;
 
-  const note = notes.find((n) => n.id === n.id);
+  const note = notes.find((n) => n.id === Number(id));
+  if (!note) return res.json({ status: 404, message: "Can`t find note." });
 
   return res.json({ status: 200, message: "OK", note: note });
 };
@@ -22,7 +24,14 @@ notesRouter.get("/:id", getNote);
 
 // POST NOTE
 const postNote: RequestHandler = (req, res) => {
-  const { userId, title, content, tags } = req.body;
+  const { userId } = req.body; // Should be removed.
+
+  const result = noteSchema.safeParse(req.body);
+
+  if (!result.success)
+    return res.json({ status: 400, message: "Can`t post note." });
+
+  const { title, content, tags } = result.data;
 
   const note = {
     id: Number(Date.now()),
@@ -33,18 +42,26 @@ const postNote: RequestHandler = (req, res) => {
     created_at: Date.now(),
   };
 
-  res.json({ status: 201, message: "OK", note: note });
+  return res.json({ status: 201, message: "OK", note: note });
 };
 notesRouter.post("/", postNote);
 
 // EDIT NOTE
 const editNote: RequestHandler = (req, res) => {
   const { id } = req.params;
-  const { title, content, tags } = req.body;
+
+  const result = noteSchema.safeParse(req.body);
+
+  if (!result.success)
+    return res.json({ status: 400, message: "Invalid note data." });
+
+  const { title, content, tags } = result.data;
 
   const index = notes.findIndex((n) => n.id === Number(id));
-  notes[index] = { ...notes[index], title, content, tags };
-  res.json({ status: 200, message: "OK", note: notes[index] });
+  if (index === -1)
+    return res.json({ status: 404, message: "Note not found." });
+  notes[index] = { ...notes[index]!, title, content, tags };
+  return res.json({ status: 200, message: "OK", note: notes[index] });
 };
 notesRouter.put("/:id", editNote);
 
