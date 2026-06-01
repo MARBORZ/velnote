@@ -1,16 +1,21 @@
 import { NoteForm } from "@/entities/NoteForm";
+import { notes_api } from "@/shared/api/notes";
 import { useState, type MouseEvent } from "react";
+import { useNavigate } from "react-router";
 
 export function NewNote() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [tags, setTags] = useState<string[]>([]);
 
-    const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      if (!title || !content || !tags.length) return console.log("none data.");
-      console.log({ title, content, tags });
-    };
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!title || !content || !tags.length) return;
+    await notes_api.create(title, content, tags);
+    navigate('/notes');
+  };
 
   return (
     <NoteForm

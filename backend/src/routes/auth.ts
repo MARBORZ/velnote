@@ -2,12 +2,18 @@ import { RequestHandler, Router } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { users } from "../data/mockData.js";
+import { userSchema } from "../validators/schemas.js";
 
 export const authRouter = Router();
 
 // REGISTER USER
 const registerUser: RequestHandler = async (req, res) => {
-  const { email, password } = req.body;
+  const result = userSchema.safeParse(req.body);
+
+  if (!result.success)
+    return res.json({ status: 401, message: "Fail to register." });
+
+  const { email, password } = result.data;
 
   if (users.some((u) => u.email === email))
     return res.json({
@@ -41,7 +47,12 @@ authRouter.post("/register", registerUser);
 
 // LOGIN USER
 const loginUser: RequestHandler = async (req, res) => {
-  const { email, password } = req.body;
+  const result = userSchema.safeParse(req.body);
+
+  if (!result.success)
+    return res.json({ status: 401, message: "Fail to login." });
+
+  const { email, password } = result.data;
 
   const user = users.find((u) => u.email === email);
   if (!user) return res.json({ status: 404, message: "No user found." });

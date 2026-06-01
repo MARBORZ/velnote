@@ -1,17 +1,26 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useState } from "react";
 import styles from "./register.module.scss";
+import { auth } from "@/shared/api/auth";
 
 export function Register() {
+  const navigate = useNavigate()
+
   const [password, setPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
-  const passwordMismatch = password !== checkPassword && checkPassword.length > 0;
+  const passwordMismatch = password !== checkPassword && checkPassword.length > 0 && checkPassword.length < 6;
 
+  const handleSubmit = async (formData: FormData) => {
+    const email = formData.get('email') as string
+    const password = formData.get('password') as string
+    await auth.register(email, password)
+    navigate('/login')
+  }
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className={`${styles.card} w-full max-w-md p-8`}>
         <h1 className="text-2xl font-bold mb-6">Register</h1>
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" action={handleSubmit}>
           <div className="flex flex-col gap-1">
             <label htmlFor="email" className="text-sm font-medium">Email</label>
             <input id="email" type="email" name="email" autoComplete="email" className={`${styles.input} w-full px-3 py-2`} />
