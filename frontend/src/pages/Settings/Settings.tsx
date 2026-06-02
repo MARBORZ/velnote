@@ -1,11 +1,14 @@
 import { BackArrow } from "@/shared/ui/BackArrow/BackArrow";
-import { userData } from "@/shared/lib/userData";
 import { useEffect, useRef, type MouseEvent } from "react";
 import styles from "./settings.module.scss";
+import { useUser } from "@/shared/hooks/useUser";
+import { logout } from "@/shared/lib/logout";
+import { useNavigate } from "react-router";
 
 export function Settings() {
-  const user = userData[0];
+  const navigate = useNavigate();
 
+  const user = useUser();
   const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -66,7 +69,13 @@ export function Settings() {
               <p className={styles.settingLabel}>Log out</p>
               <p className={styles.settingDesc}>Sign out of your account</p>
             </div>
-            <button className={styles.logoutBtn}>Log out</button>
+            <button
+              type="button"
+              className={styles.logoutBtn}
+              onClick={() => logout(navigate)}
+            >
+              Log out
+            </button>
           </div>
         </section>
       </div>

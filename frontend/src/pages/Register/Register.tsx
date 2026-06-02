@@ -17,7 +17,7 @@ export function Register() {
     navigate('/login')
   }
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-50">
+    <main className={`${styles.page} flex items-center justify-center`}>
       <div className={`${styles.card} w-full max-w-md p-8`}>
         <h1 className="text-2xl font-bold mb-6">Register</h1>
         <form className="flex flex-col gap-4" action={handleSubmit}>

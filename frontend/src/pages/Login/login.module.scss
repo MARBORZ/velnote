@@ -4,12 +4,18 @@
   background: $color-bg;
   border-radius: $radius-2xl;
   box-shadow: $shadow-lg;
+
+  :global(html.dark) & {
+    background: $dark-bg-secondary;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+  }
 }
 
 .input {
   border: 1px solid $color-border;
   border-radius: $radius-md;
   color: $color-text;
+  background: $color-bg;
   transition: border-color $transition-fast;
 
   &:focus {
@@ -18,6 +24,15 @@
   }
 
   &::placeholder { color: $color-text-tertiary; }
+
+  :global(html.dark) & {
+    background: $dark-bg-tertiary;
+    border-color: $dark-border;
+    color: $dark-text;
+
+    &::placeholder { color: $dark-text-tertiary; }
+    &:focus { border-color: $dark-primary; }
+  }
 }
 
 .button {
@@ -29,4 +44,18 @@
 
   &:hover { background: $color-primary-hover; }
   &:active { transform: scale(0.98); }
+
+  :global(html.dark) & {
+    background: $dark-primary;
+    &:hover { background: $dark-primary-hover; }
+  }
+}
+
+.page {
+  background: $color-bg-secondary;
+  min-height: 100vh;
+
+  :global(html.dark) & {
+    background: $dark-bg;
+  }
 }

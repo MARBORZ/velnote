@@ -5,7 +5,7 @@ export interface Note {
   content: string;
   tags: string[];
   created_at: Date;
-  updated_at: Date;
+  updated_at?: Date;
 }
 
 export interface User {

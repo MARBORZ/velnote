@@ -36,11 +36,12 @@ const registerUser: RequestHandler = async (req, res) => {
 
   users.push(user);
 
+  const { password: _, ...safeUser } = user;
+
   return res.json({
     status: 200,
     message: "OK",
-    email: email,
-    password: hashedPassword, // TEST DEV
+    user: safeUser,
   });
 };
 authRouter.post("/register", registerUser);
