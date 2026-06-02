@@ -1,7 +1,10 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import styles from "./sidebar.module.scss";
+import { logout } from "@/shared/lib/logout";
 
 export function Sidebar() {
+  const navigate = useNavigate()
+
   return (
     <aside className={`${styles.sidebar} sticky top-0 h-screen w-60 shrink-0`}>
       <nav className="flex flex-col h-full px-4 py-6">
@@ -21,10 +24,17 @@ export function Sidebar() {
           </li>
         </ul>
         <div className="flex flex-col gap-1 pt-4 border-t border-gray-200">
-          <Link to="/settings" className={`${styles.settings} block px-3 py-2 text-sm`}>
+          <Link
+            to="/settings"
+            className={`${styles.settings} block px-3 py-2 text-sm`}
+          >
             Settings
           </Link>
-          <button className={`${styles.logout} px-3 py-2 text-left text-sm w-full cursor-pointer`}>
+          <button
+            type="button"
+            className={`${styles.logout} px-3 py-2 text-left text-sm w-full cursor-pointer`}
+            onClick={() => logout(navigate)}
+          >
             Logout
           </button>
         </div>

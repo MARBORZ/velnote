@@ -1,36 +1,33 @@
 import { useParams, Link, useNavigate } from "react-router";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { NotFound } from "@/shared/ui/NotFound";
 import { BackArrow } from "@/shared/ui/BackArrow/BackArrow";
 import styles from "./viewnote.module.scss";
-import { useEffect, useState } from "react";
-import type { TNote } from "@/shared/types";
 import { notes_api } from "@/shared/api/notes";
+import { useNote } from "@/shared/hooks/useNote";
+import { NotFound } from "@/shared/ui/NotFound";
 
 export function ViewNote() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const { id } = useParams();
-  const [note, setNote] = useState<TNote | null>(null)
-
-  useEffect(() => {
-    if (!id) return;
-    notes_api.getById(Number(id)).then(res => setNote(res.data.note))
-  }, [id])
-
-  if (!id) return <NotFound />;
-  if (!note) return <NotFound />;
+  const { note, loading } = useNote(id);
 
   const handleRemove = async () => {
-    await notes_api.remove(Number(id))
-    navigate('/notes')
-  }
+    await notes_api.remove(Number(id));
+    navigate("/notes");
+  };
+
+  if (!id) return <NotFound />;
+  if (loading) return;
+  if (!note) return <NotFound />;
 
   return (
     <>
       <BackArrow navigate="/notes" />
-      <article className={`${styles.article} max-w-3xl mx-auto p-8 flex flex-col gap-4`}>
+      <article
+        className={`${styles.article} max-w-3xl mx-auto p-8 flex flex-col gap-4`}
+      >
         <h1 className={`${styles.title} text-3xl font-bold`}>{note.title}</h1>
         <div className="prose">
           <Markdown remarkPlugins={[remarkGfm]}>{note.content}</Markdown>
@@ -42,12 +39,21 @@ export function ViewNote() {
             </span>
           ))}
         </div>
-        <span className={`${styles.date} text-xs`}>{note.created_at.toLocaleDateString()}</span>
+        <span className={`${styles.date} text-xs`}>
+          {new Date(note.created_at).toLocaleDateString()}
+        </span>
         <div className="flex gap-3">
-          <Link to={`/notes/${note.id}/edit`} className={`${styles.editBtn} px-4 py-2 text-sm`}>
+          <Link
+            to={`/notes/${note.id}/edit`}
+            className={`${styles.editBtn} px-4 py-2 text-sm`}
+          >
             Edit
           </Link>
-          <button onClick={handleRemove} className={`${styles.deleteBtn} px-4 py-2 text-sm cursor-pointer`}>
+          <button
+            type="button"
+            onClick={handleRemove}
+            className={`${styles.deleteBtn} px-4 py-2 text-sm cursor-pointer`}
+          >
             Delete
           </button>
         </div>

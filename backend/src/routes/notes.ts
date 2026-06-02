@@ -24,7 +24,7 @@ notesRouter.get("/:id", getNote);
 
 // POST NOTE
 const postNote: RequestHandler = (req, res) => {
-  const { userId } = req.body; // Should be removed.
+  const userId = 1; // Should be removed.
 
   const result = noteSchema.safeParse(req.body);
 
@@ -39,9 +39,12 @@ const postNote: RequestHandler = (req, res) => {
     title: title,
     content: content,
     tags: tags,
-    created_at: Date.now(),
+    created_at: new Date(),
   };
 
+  console.log(note);
+
+  notes.push(note);
   return res.json({ status: 201, message: "OK", note: note });
 };
 notesRouter.post("/", postNote);
@@ -61,6 +64,7 @@ const editNote: RequestHandler = (req, res) => {
   if (index === -1)
     return res.json({ status: 404, message: "Note not found." });
   notes[index] = { ...notes[index]!, title, content, tags };
+  console.log(notes[index]);
   return res.json({ status: 200, message: "OK", note: notes[index] });
 };
 notesRouter.put("/:id", editNote);

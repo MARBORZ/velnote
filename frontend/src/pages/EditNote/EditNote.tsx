@@ -1,24 +1,36 @@
-import { mockData } from "@/shared/lib/mockData";
 import { NotFound } from "@/shared/ui/NotFound";
-import { useState, type MouseEvent } from "react";
-import { useParams } from "react-router";
+import { useEffect, useState, type MouseEvent } from "react";
+import { useNavigate, useParams } from "react-router";
 import { NoteForm } from "@/entities/NoteForm";
+import { notes_api } from "@/shared/api/notes";
+import { useNote } from "@/shared/hooks/useNote";
 
 export function EditNote() {
+  const navigate = useNavigate();
   const { id } = useParams();
-  const note = id ? mockData.find((n) => n.id === +id) : undefined;
+  const { note, loading } = useNote(id);
 
-  const [title, setTitle] = useState(note?.title ?? "");
-  const [content, setContent] = useState(note?.content ?? "");
-  const [tags, setTags] = useState<string[]>(note?.tags ?? []);
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [tags, setTags] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (note) {
+      setTitle(note.title);
+      setContent(note.content);
+      setTags(note.tags);
+    }
+  }, [note]);
 
   if (!id) return <NotFound />;
+  if (loading) return null;
   if (!note) return <NotFound />;
 
-  const handleSubmit = (e: MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (!title || !content || !tags.length) return console.log("none data.");
-    console.log({ title, content, tags });
+    if (!title || !content || !tags.length) return;
+    await notes_api.update(+id, title, content, tags);
+    navigate("/notes");
   };
 
   return (
