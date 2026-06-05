@@ -10,6 +10,7 @@ export const verifyJWT: RequestHandler = (req, res, next) => {
   return jwt.verify(String(token), process.env.JWT_TOKEN, (error, decoded) => {
     if (error) return res.json({ status: 401, message: "Invalid Token" });
 
+    req.user = decoded as { userId: number; email: string; role: string };
     return next();
   });
 };

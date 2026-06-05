@@ -23,7 +23,7 @@ export function Sidebar() {
             </Link>
           </li>
         </ul>
-        <div className="flex flex-col gap-1 pt-4 border-t border-gray-200">
+        <div className={`${styles.bottom} flex flex-col gap-1 pt-4`}>
           <Link
             to="/settings"
             className={`${styles.settings} block px-3 py-2 text-sm`}

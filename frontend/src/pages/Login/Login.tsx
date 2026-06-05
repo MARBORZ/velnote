@@ -9,7 +9,6 @@ export function Login() {
     const email = formData.get('email') as string
     const password = formData.get('password') as string
     const res = await auth.login(email, password)
-    console.log(res.data); 
     localStorage.setItem('token', res.data.token)
     navigate('/notes')
   }

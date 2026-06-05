@@ -24,7 +24,8 @@ notesRouter.get("/:id", getNote);
 
 // POST NOTE
 const postNote: RequestHandler = (req, res) => {
-  const userId = 1; // Should be removed.
+  const userId = req.user?.userId;
+  if (!userId) return res.json({ status: 401, message: "Unauthorized" });
 
   const result = noteSchema.safeParse(req.body);
 
@@ -42,8 +43,6 @@ const postNote: RequestHandler = (req, res) => {
     created_at: new Date(),
   };
 
-  console.log(note);
-
   notes.push(note);
   return res.json({ status: 201, message: "OK", note: note });
 };
@@ -51,6 +50,9 @@ notesRouter.post("/", postNote);
 
 // EDIT NOTE
 const editNote: RequestHandler = (req, res) => {
+  const userId = req.user?.userId;
+  if (!userId) return res.json({ status: 401, message: "Unauthorized" });
+
   const { id } = req.params;
 
   const result = noteSchema.safeParse(req.body);
@@ -61,20 +63,36 @@ const editNote: RequestHandler = (req, res) => {
   const { title, content, tags } = result.data;
 
   const index = notes.findIndex((n) => n.id === Number(id));
+  const note = notes[index];
+
   if (index === -1)
     return res.json({ status: 404, message: "Note not found." });
+
+  if (note?.userId !== userId)
+    return res.json({ status: 403, message: "Forbidden" });
+
   notes[index] = { ...notes[index]!, title, content, tags };
-  console.log(notes[index]);
   return res.json({ status: 200, message: "OK", note: notes[index] });
 };
 notesRouter.put("/:id", editNote);
 
 // DELETE NOTE
 const deleteNote: RequestHandler = (req, res) => {
+  const userId = req.user?.userId;
+  if (!userId) return res.json({ status: 401, message: "Unauthorized" });
+
   const { id } = req.params;
 
   const index = notes.findIndex((n) => n.id === Number(id));
+  const note = notes[index];
+
+  if (index === -1)
+    return res.json({ status: 404, message: "Note not found." });
+
+  if (note?.userId !== userId)
+    return res.json({ status: 403, message: "Forbidden" });
+
   notes.splice(index, 1);
-  res.json({ status: 200, message: "OK" });
+  return res.json({ status: 200, message: "OK" });
 };
 notesRouter.delete("/:id", deleteNote);
