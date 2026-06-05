@@ -3,8 +3,8 @@ export interface TNote {
   title: string;
   content: string;
   tags: string[];
-  created_at: Date;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface Tag {

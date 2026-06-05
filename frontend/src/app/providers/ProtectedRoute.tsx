@@ -1,10 +1,11 @@
 import { Navigate, Outlet } from "react-router";
 import { Layout } from "./Layout/Layout";
-import { useUser } from "@/shared/hooks/useUser";
+import { isTokenValid } from "@/shared/lib/isTokenValid";
 
 export function ProtectedRoute() {
-  const token: string = localStorage.getItem("token") || "";
-  if (!token || !useUser()) return <Navigate to={"/login"} replace />;
+  const token = localStorage.getItem("token") || "";
+
+  if (!isTokenValid(token)) return <Navigate to={"/login"} replace />;
 
   return (
     <Layout>

@@ -7,15 +7,9 @@ import { EditNote } from "@/pages/EditNote";
 import { ViewNote } from "@/pages/ViewNote";
 import { ProtectedRoute } from "@/app/providers/ProtectedRoute";
 import { Settings } from "@/pages/Settings";
-import { useEffect } from "react";
+import { isTokenValid } from "@/shared/lib/isTokenValid";
 
 export function App() {
-  useEffect(() => {
-    if (localStorage.getItem("theme") === "dark") {
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
-
   return (
     <BrowserRouter>
       <Routes>
@@ -23,7 +17,11 @@ export function App() {
           path="/"
           element={
             <Navigate
-              to={localStorage.getItem("token") ? "/notes" : "/login"}
+              to={
+                isTokenValid(localStorage.getItem("token") || "")
+                  ? "/notes"
+                  : "/login"
+              }
               replace
             />
           }
