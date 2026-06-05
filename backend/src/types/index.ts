@@ -1,6 +1,6 @@
 export interface Note {
   id: number;
-  userId: number
+  user_id: number
   title: string;
   content: string;
   tags: string[];

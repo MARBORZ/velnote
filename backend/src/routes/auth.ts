@@ -1,8 +1,10 @@
 import { RequestHandler, Router } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { users } from "../data/mockData.js";
 import { userSchema } from "../validators/schemas.js";
+import { pool } from "../db/pool.js";
+import { User } from "../types/index.js";
+import { tryCatch } from "../utils/tryCatch.js";
 
 export const authRouter = Router();
 
@@ -15,7 +17,12 @@ const registerUser: RequestHandler = async (req, res) => {
 
   const { email, password } = result.data;
 
-  if (users.some((u) => u.email === email))
+  const existing = await pool.query<User>(
+    "SELECT id FROM users WHERE email = $1",
+    [email],
+  );
+
+  if (existing.rows.length > 0)
     return res.json({
       status: 404,
       message:
@@ -27,14 +34,18 @@ const registerUser: RequestHandler = async (req, res) => {
     Number(process.env.SALT_ROUNDS) || 12,
   );
 
-  const user = {
-    id: Number(Date.now()),
-    email: String(email),
-    password: String(hashedPassword),
-    role: "user" as const,
-  };
+  const { rows } = await pool.query<User>(
+    `
+      INSERT INTO users (email, password, role)
+      VALUES ($1, $2, 'user')
+      RETURNING id, email, role
+    `,
+    [email, hashedPassword],
+  );
 
-  users.push(user);
+  const user = rows[0];
+
+  if (!user) return res.json({ status: 401, message: "Can`t find user." });
 
   const { password: _, ...safeUser } = user;
 
@@ -44,7 +55,7 @@ const registerUser: RequestHandler = async (req, res) => {
     user: safeUser,
   });
 };
-authRouter.post("/register", registerUser);
+authRouter.post("/register", tryCatch(registerUser));
 
 // LOGIN USER
 const loginUser: RequestHandler = async (req, res) => {
@@ -55,7 +66,12 @@ const loginUser: RequestHandler = async (req, res) => {
 
   const { email, password } = result.data;
 
-  const user = users.find((u) => u.email === email);
+  const { rows } = await pool.query<User>(
+    "SELECT * FROM users WHERE email = $1",
+    [email],
+  );
+
+  const user = rows[0];
   if (!user) return res.json({ status: 404, message: "No user found." });
 
   const comparePassword = await bcrypt.compare(password, user?.password);
@@ -80,4 +96,4 @@ const loginUser: RequestHandler = async (req, res) => {
     });
   }
 };
-authRouter.post("/login", loginUser);
+authRouter.post("/login", tryCatch(loginUser));
