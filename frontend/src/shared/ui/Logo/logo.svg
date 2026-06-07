@@ -1,0 +1,20 @@
+<svg width="84" height="84" viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="drop-shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.5"/>
+    </filter>
+  </defs>
+  <rect width="84" height="84" rx="22" fill="#7C3AED"/>
+  <!-- Shadow -->
+  <g transform="rotate(-20 42 42)">
+    <path d="M42 13 C42 13 24 32 24 46 C24 57 32 65 42 65 C52 65 60 57 60 46 C60 32 42 13 42 13Z"
+          fill="#2e1065" opacity="0.7" filter="url(#drop-shadow)"
+          transform="translate(5, 7)"/>
+  </g>
+  <!-- Drop -->
+  <g transform="rotate(-20 42 42)">
+    <path d="M42 13 C42 13 24 32 24 46 C24 57 32 65 42 65 C52 65 60 57 60 46 C60 32 42 13 42 13Z" fill="white"/>
+  </g>
+  <!-- Highlight -->
+  <ellipse cx="34" cy="37" rx="4" ry="7" fill="white" opacity="0.28" transform="rotate(-40 34 37)"/>
+</svg>
