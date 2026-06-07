@@ -42,15 +42,15 @@
   gap: $space-1;
   font-size: $font-xs;
   font-weight: $font-medium;
-  color: $color-primary;
-  background: $color-bg-secondary;
+  color: $color-tag-text;
+  background: $color-tag-bg;
   border-radius: $radius-full;
   padding: 2px $space-3;
   width: fit-content;
   white-space: nowrap;
   :global(html.dark) & {
-    background: $dark-bg-tertiary;
-    color: $dark-primary;
+    background: $dark-tag-bg;
+    color: $dark-tag-text;
   }
 }
 

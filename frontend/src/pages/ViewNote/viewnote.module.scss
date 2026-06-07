@@ -5,7 +5,7 @@
   border-radius: $radius-xl;
   box-shadow: $shadow-sm;
   :global(html.dark) & {
-    background-color: $dark-bg-secondary;
+    background-color: $dark-bg-card;
     border-color: $dark-border;
   }
 }

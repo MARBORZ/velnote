@@ -12,7 +12,7 @@
   }
 
   :global(html.dark) & {
-    background-color: $dark-bg-secondary;
+    background-color: $dark-bg-card;
     border-color: $dark-border;
     &:hover { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); }
   }
@@ -29,12 +29,12 @@
 }
 
 .tag {
-  background: $color-bg-tertiary;
-  color: $color-text-secondary;
+  background: $color-tag-bg;
+  color: $color-tag-text;
   border-radius: $radius-full;
   :global(html.dark) & {
-    background: $dark-bg;
-    color: $dark-text-secondary;
+    background: $dark-tag-bg;
+    color: $dark-tag-text;
   }
 }
 

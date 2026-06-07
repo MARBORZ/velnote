@@ -30,12 +30,12 @@
   display: flex;
   align-items: center;
   gap: $space-4;
-  background-color: $color-bg;
+  background-color: $color-bg-card;
   border: 1px solid $color-border;
   border-radius: $radius-xl;
   padding: $space-4 $space-5;
   :global(html.dark) & {
-    background-color: $dark-bg-secondary;
+    background-color: $dark-bg-card;
     border-color: $dark-border;
   }
 }
@@ -78,12 +78,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: $color-bg;
+  background-color: $color-bg-card;
   border: 1px solid $color-border;
   border-radius: $radius-xl;
   padding: $space-4 $space-5;
   :global(html.dark) & {
-    background-color: $dark-bg-secondary;
+    background-color: $dark-bg-card;
     border-color: $dark-border;
   }
 }
