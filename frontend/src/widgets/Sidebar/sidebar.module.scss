@@ -12,7 +12,7 @@
 }
 
 .sidebar {
-  width: 260px;
+  width: 64px;
   flex-shrink: 0;
   background-color: $color-bg-secondary;
   position: sticky;
@@ -20,8 +20,6 @@
   height: 100vh;
 
   :global(html.dark) & { background-color: $dark-bg-secondary; }
-
-  @media (max-width: 1023px) and (min-width: 768px) { width: 220px; }
 
   @media (max-width: 767px) {
     position: fixed;
@@ -40,7 +38,11 @@
 }
 
 .nav {
-  padding: $space-6 $space-5;
+  padding: $space-6 $space-3;
+
+  @media (max-width: 767px) {
+    padding: $space-6 $space-5;
+  }
 }
 
 // ── Logo row ──────────────────────────────────────────────────────────────────
@@ -48,8 +50,12 @@
 .logoRow {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: $space-8;
+
+  @media (max-width: 767px) {
+    justify-content: space-between;
+  }
 }
 
 .logoLink {
@@ -72,6 +78,9 @@
   letter-spacing: -0.03em;
   color: $color-text;
   transition: color $transition-fast;
+  display: none;
+
+  @media (max-width: 767px) { display: block; }
 
   :global(html.dark) & { color: $dark-text; }
 }
@@ -102,9 +111,10 @@
 .link {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: $space-3;
   width: 100%;
-  padding: $space-2 $space-3;
+  padding: $space-2;
   border-radius: $radius-lg;
   font-size: $font-sm;
   font-weight: $font-medium;
@@ -114,11 +124,19 @@
 
   svg { flex-shrink: 0; }
 
+  span { display: none; }
+
   &:hover { background: $color-bg-tertiary; color: $color-text; }
 
   :global(html.dark) & {
     color: $dark-text-secondary;
     &:hover { background: $dark-bg-tertiary; color: $dark-text; }
+  }
+
+  @media (max-width: 767px) {
+    justify-content: flex-start;
+    padding: $space-2 $space-3;
+    span { display: inline; }
   }
 }
 
@@ -142,8 +160,13 @@
   display: flex;
   flex-direction: column;
   gap: $space-1;
+  align-items: center;
 
   :global(html.dark) & { border-color: $dark-border; }
+
+  @media (max-width: 767px) {
+    align-items: stretch;
+  }
 }
 
 .userRow {
@@ -196,9 +219,10 @@
 .logoutBtn {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: $space-3;
   width: 100%;
-  padding: $space-2 $space-3;
+  padding: $space-2;
   border-radius: $radius-lg;
   font-size: $font-sm;
   font-weight: $font-medium;
@@ -212,10 +236,18 @@
 
   svg { flex-shrink: 0; }
 
+  span { display: none; }
+
   &:hover { color: $color-error; background: rgba(239, 68, 68, 0.08); }
 
   :global(html.dark) & {
     color: $dark-text-secondary;
     &:hover { color: $dark-error; background: rgba(244, 112, 103, 0.1); }
+  }
+
+  @media (max-width: 767px) {
+    justify-content: flex-start;
+    padding: $space-2 $space-3;
+    span { display: inline; }
   }
 }
