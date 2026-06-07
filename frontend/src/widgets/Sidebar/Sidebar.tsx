@@ -1,14 +1,17 @@
 import { Link, useNavigate, useLocation } from "react-router";
-import { FileText, CirclePlus, Settings, LogOut, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { FileText, CirclePlus, Settings, LogOut } from "lucide-react";
 import styles from "./sidebar.module.scss";
 import { logout } from "@/shared/lib/logout";
 import logoIcon from "@/shared/ui/Logo/logo.svg";
 
-export function Sidebar() {
+interface SidebarProps {
+  open?: boolean;
+  onClose?: () => void;
+}
+
+export function Sidebar({ open = false, onClose }: SidebarProps) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [open, setOpen] = useState(false);
 
   const isNotesActive =
     pathname === "/notes" ||
@@ -16,32 +19,15 @@ export function Sidebar() {
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(href + "/");
 
-  const close = () => setOpen(false);
-
   return (
     <>
-      {/* Mobile hamburger */}
-      <button
-        className={styles.hamburger}
-        onClick={() => setOpen(true)}
-        aria-label="Open menu"
-        type="button"
-      >
-        <Menu size={22} />
-      </button>
+      {/* Overlay — mobile only */}
+      {open && <div className={styles.overlay} onClick={onClose} />}
 
-      {/* Overlay */}
-      {open && <div className={styles.overlay} onClick={close} />}
-
-      {/* Sidebar */}
-      <aside className={`${styles.sidebar} ${open ? styles.sidebarOpen : ""} sticky top-0 h-screen shrink-0`}>
-        {/* Mobile close */}
-        <button className={styles.closeBtn} onClick={close} type="button" aria-label="Close menu">
-          <X size={20} />
-        </button>
-
+      <aside className={`${styles.sidebar} ${open ? styles.sidebarOpen : ""}`}>
         <nav className={`${styles.nav} flex flex-col h-full`}>
-          <Link to="/notes" className={styles.logoRow} onClick={close}>
+
+          <Link to="/notes" className={styles.logoRow} onClick={onClose}>
             <img src={logoIcon} alt="Velnote" width={36} height={36} className={styles.logoIcon} />
             <span className={styles.logoText}>Velnote</span>
           </Link>
@@ -51,20 +37,20 @@ export function Sidebar() {
               <Link
                 to="/notes"
                 className={`${styles.link} ${isNotesActive ? styles.linkActive : ""}`}
-                onClick={close}
+                onClick={onClose}
               >
                 <FileText size={18} />
-                <span className={styles.linkText}>Notes</span>
+                <span>Notes</span>
               </Link>
             </li>
             <li>
               <Link
                 to="/notes/new"
                 className={`${styles.link} ${isActive("/notes/new") ? styles.linkActive : ""}`}
-                onClick={close}
+                onClick={onClose}
               >
                 <CirclePlus size={18} />
-                <span className={styles.linkText}>New Note</span>
+                <span>New Note</span>
               </Link>
             </li>
           </ul>
@@ -73,10 +59,10 @@ export function Sidebar() {
             <Link
               to="/settings"
               className={`${styles.link} ${isActive("/settings") ? styles.linkActive : ""}`}
-              onClick={close}
+              onClick={onClose}
             >
               <Settings size={18} />
-              <span className={styles.linkText}>Settings</span>
+              <span>Settings</span>
             </Link>
             <button
               type="button"
@@ -84,9 +70,10 @@ export function Sidebar() {
               onClick={() => logout(navigate)}
             >
               <LogOut size={18} />
-              <span className={styles.linkText}>Log out</span>
+              <span>Log out</span>
             </button>
           </div>
+
         </nav>
       </aside>
     </>
