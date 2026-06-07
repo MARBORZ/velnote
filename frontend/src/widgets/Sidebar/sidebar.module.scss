@@ -1,77 +1,17 @@
 @use "tokens" as *;
 
-// ── Hamburger (mobile only) ──────────────────────────────────────────────────
-
-.hamburger {
-  display: none;
-  position: fixed;
-  top: $space-4;
-  left: $space-4;
-  z-index: 50;
-  width: 40px;
-  height: 40px;
-  border-radius: $radius-lg;
-  border: none;
-  background: $color-bg-card;
-  color: $color-text-secondary;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  box-shadow: $shadow-md;
-  transition: background $transition-fast;
-
-  &:hover { background: $color-bg-tertiary; }
-
-  :global(html.dark) & {
-    background: $dark-bg-card;
-    color: $dark-text-secondary;
-    &:hover { background: $dark-bg-tertiary; }
-  }
-
-  @media (max-width: 767px) {
-    display: flex;
-  }
-}
-
-// ── Overlay (mobile) ─────────────────────────────────────────────────────────
+// ── Overlay (mobile only) ────────────────────────────────────────────────────
 
 .overlay {
-  display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 40;
+  background: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(2px);
+  z-index: 40;
+  display: none;
 
   @media (max-width: 767px) {
     display: block;
-  }
-}
-
-// ── Close button (mobile only) ───────────────────────────────────────────────
-
-.closeBtn {
-  display: none;
-  position: absolute;
-  top: $space-4;
-  right: $space-4;
-  width: 32px;
-  height: 32px;
-  border-radius: $radius-md;
-  border: none;
-  background: $color-bg-tertiary;
-  color: $color-text-secondary;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-
-  :global(html.dark) & {
-    background: $dark-bg-tertiary;
-    color: $dark-text-secondary;
-  }
-
-  @media (max-width: 767px) {
-    display: flex;
   }
 }
 
@@ -79,14 +19,17 @@
 
 .sidebar {
   width: 260px;
+  flex-shrink: 0;
   background-color: $color-bg-secondary;
-  transition: transform 0.25s ease;
+  position: sticky;
+  top: 0;
+  height: 100vh;
 
   :global(html.dark) & {
     background-color: $dark-bg-secondary;
   }
 
-  // Tablet: narrower
+  // Tablet
   @media (max-width: 1023px) and (min-width: 768px) {
     width: 220px;
   }
@@ -100,6 +43,7 @@
     width: 260px;
     z-index: 50;
     transform: translateX(-100%);
+    transition: transform 0.25s ease;
   }
 }
 
@@ -109,15 +53,13 @@
   }
 }
 
+// ── Nav padding ───────────────────────────────────────────────────────────────
+
 .nav {
   padding: $space-6 $space-5;
-
-  @media (max-width: 767px) {
-    padding-top: $space-12;
-  }
 }
 
-// ── Logo ────────────────────────────────────────────────────────────────────
+// ── Logo ──────────────────────────────────────────────────────────────────────
 
 .logoRow {
   display: flex;
@@ -144,7 +86,7 @@
   :global(html.dark) & { color: $dark-text; }
 }
 
-// ── Nav links ────────────────────────────────────────────────────────────────
+// ── Nav links ─────────────────────────────────────────────────────────────────
 
 .link {
   display: flex;
@@ -194,15 +136,13 @@
   }
 }
 
-// ── Bottom section ───────────────────────────────────────────────────────────
+// ── Bottom ────────────────────────────────────────────────────────────────────
 
 .bottom {
   padding-top: $space-4;
   border-top: 1px solid $color-border;
 
-  :global(html.dark) & {
-    border-color: $dark-border;
-  }
+  :global(html.dark) & { border-color: $dark-border; }
 }
 
 .logoutBtn {
