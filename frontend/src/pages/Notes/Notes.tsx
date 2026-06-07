@@ -37,11 +37,13 @@ export function Notes() {
 
       {/* Cards */}
       {filteredNotes.length === 0 ? (
-        <EmptyState
-          title={search ? "No notes found" : "No notes yet"}
-          description={search ? "Try a different search query" : "Create your first note to get started"}
-          showAction={!search}
-        />
+        <div className="flex-1 flex items-center justify-center min-h-[50vh]">
+          <EmptyState
+            title={search ? "No notes found" : "No notes yet"}
+            description={search ? "Try a different search query" : "Create your first note to get started"}
+            showAction={!search}
+          />
+        </div>
       ) : (
         <div className="flex flex-col gap-4">
           {filteredNotes.map((n) => (
