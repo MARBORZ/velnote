@@ -29,7 +29,7 @@ export function Settings() {
     <div className="flex flex-col gap-6">
       <BackArrow navigate="/notes" />
 
-      <h1 className={styles.heading}>Settings</h1>
+      <h1 className={`${styles.heading} ${styles.headingCentered}`}>Settings</h1>
 
       <div className={styles.content}>
 
