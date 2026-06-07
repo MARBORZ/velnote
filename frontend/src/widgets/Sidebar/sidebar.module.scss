@@ -1,60 +1,137 @@
 @use "tokens" as *;
 
 .sidebar {
-  border-right: 1px solid $color-border;
+  background-color: $color-bg-secondary;
+
   :global(html.dark) & {
     background-color: $dark-bg-secondary;
+  }
+}
+
+.nav {
+  padding: $space-6 $space-5;
+}
+
+// ── Logo ────────────────────────────────────────────────────────────────────
+
+.logoRow {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  margin-bottom: $space-8;
+  text-decoration: none;
+}
+
+.logoIcon {
+  border-radius: 9px;
+  flex-shrink: 0;
+}
+
+.logoText {
+  font-size: $font-xl;
+  font-weight: $font-bold;
+  letter-spacing: -0.03em;
+  color: $color-text;
+  transition: color $transition-fast;
+
+  .logoRow:hover & { color: $color-primary; }
+
+  :global(html.dark) & { color: $dark-text; }
+}
+
+// ── Nav links ────────────────────────────────────────────────────────────────
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  width: 100%;
+  padding: $space-2 $space-3;
+  border-radius: $radius-lg;
+  font-size: $font-sm;
+  font-weight: $font-medium;
+  color: $color-text-secondary;
+  transition: background $transition-fast, color $transition-fast;
+  text-decoration: none;
+
+  svg { flex-shrink: 0; }
+
+  &:hover {
+    background: $color-bg-tertiary;
+    color: $color-text;
+  }
+
+  :global(html.dark) & {
+    color: $dark-text-secondary;
+
+    &:hover {
+      background: $dark-bg-tertiary;
+      color: $dark-text;
+    }
+  }
+}
+
+.linkActive {
+  background: $color-primary-light;
+  color: $color-primary;
+
+  &:hover {
+    background: $color-primary-light;
+    color: $color-primary;
+  }
+
+  :global(html.dark) & {
+    background: $dark-primary-light;
+    color: $dark-primary;
+
+    &:hover {
+      background: $dark-primary-light;
+      color: $dark-primary;
+    }
+  }
+}
+
+// ── Bottom section ───────────────────────────────────────────────────────────
+
+.bottom {
+  padding-top: $space-4;
+  border-top: 1px solid $color-border;
+
+  :global(html.dark) & {
     border-color: $dark-border;
   }
 }
 
-.logo {
-  color: $color-text;
-  transition: color $transition-fast;
-  &:hover { color: $color-primary; }
-  :global(html.dark) & { color: $dark-text; }
-}
-
-.link {
-  color: $color-text;
-  border-radius: $radius-md;
-  transition: background $transition-fast;
-  &:hover { background: $color-bg-secondary; }
-  :global(html.dark) & {
-    color: $dark-text;
-    &:hover { background: $dark-bg-tertiary; }
-  }
-}
-
-.settings {
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  width: 100%;
+  padding: $space-2 $space-3;
+  border-radius: $radius-lg;
+  font-size: $font-sm;
+  font-weight: $font-medium;
   color: $color-text-secondary;
-  border-radius: $radius-md;
-  transition: background $transition-fast;
-  &:hover { background: $color-bg-secondary; }
-  :global(html.dark) & {
-    color: $dark-text-secondary;
-    &:hover { background: $dark-bg-tertiary; }
-  }
-}
-
-.bottom {
-  border-top: 1px solid $color-border;
-  :global(html.dark) & { border-color: $dark-border; }
-}
-
-.logout {
-  color: $color-text-secondary;
-  border-radius: $radius-md;
   transition: background $transition-fast, color $transition-fast;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  text-align: left;
+
+  svg { flex-shrink: 0; }
+
   &:hover {
     color: $color-error;
-    background: rgba(239, 68, 68, 0.1);
+    background: rgba(239, 68, 68, 0.08);
   }
+
   :global(html.dark) & {
     color: $dark-text-secondary;
+
     &:hover {
-      color: $color-error;
-      background: rgba(239, 68, 68, 0.1);
+      color: $dark-error;
+      background: rgba(244, 112, 103, 0.1);
     }
   }
 }
