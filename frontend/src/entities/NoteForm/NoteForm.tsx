@@ -9,6 +9,7 @@ import { Link } from "react-router";
 interface NoteFormProps {
   location: string;
   cancelLocation: string;
+  backLabel?: string;
   title: string;
   content: string;
   tags: string[];
@@ -21,6 +22,7 @@ interface NoteFormProps {
 export function NoteForm({
   location,
   cancelLocation,
+  backLabel,
   title,
   content,
   tags,
@@ -31,7 +33,7 @@ export function NoteForm({
 }: NoteFormProps) {
   return (
     <div>
-      <BackArrow navigate={location} />
+      <BackArrow navigate={location} label={backLabel} />
       <article className={`${styles.article} max-w-5xl mx-auto p-8`}>
         <div className="grid grid-cols-2 gap-6">
           <form className="flex flex-col gap-4">
