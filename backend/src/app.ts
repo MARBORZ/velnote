@@ -6,12 +6,9 @@ import { authRouter } from "./routes/auth.js";
 import { verifyJWT } from "./middleware/auth.js";
 
 export const app = express();
-// const corsOptions = {
-//   origin: "http://localhost:5173",
-// };
 
 const corsOptions = {
-  origin: "*",
+  origin: "http://localhost:5173",
 };
 
 // JSON PARSER MIDDLEWARE
