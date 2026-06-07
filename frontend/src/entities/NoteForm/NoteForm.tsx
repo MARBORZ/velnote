@@ -32,83 +32,79 @@ export function NoteForm({
   submit,
 }: NoteFormProps) {
   return (
-    <div>
+    <div className="flex flex-col gap-6 h-full">
       <BackArrow navigate={location} label={backLabel} />
-      <article className={`${styles.article} max-w-5xl mx-auto p-8`}>
-        <div className="grid grid-cols-2 gap-6">
-          <form className="flex flex-col gap-4">
-            <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium" htmlFor="title">
-                Title
-              </label>
-              <input
-                id="title"
-                type="text"
-                className={`${styles.titleInput} w-full pb-2`}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder={"Note title..."}
-              />
-            </div>
 
-            <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium" htmlFor="content">
-                Content (Markdown)
-              </label>
-              <textarea
-                id="content"
-                className={`${styles.textarea} w-full px-3 py-2 min-h-80 resize-y`}
-                onChange={(e) => setContent(e.target.value)}
-                placeholder={"Note content..."}
-              />
-            </div>
+      <div className={`${styles.card} flex-1 grid grid-cols-2`}>
 
-            <div className="flex flex-col gap-1">
-              <label className="text-sm font-medium" htmlFor="tags">
-                Tags (separate by comma)
-              </label>
-              <TagInput tags={tags} onChange={setTags}></TagInput>
-            </div>
+        {/* Left — editor */}
+        <div className={`${styles.left} flex flex-col gap-5`}>
 
-            <div className="flex gap-3">
-              <button
-                type="button"
-                className={`${styles.saveBtn} px-4 py-2 text-sm cursor-pointer`}
-                onClick={(e) => submit(e)}
-              >
-                Save
-              </button>
-              <Link
-                to={cancelLocation}
-                className={`${styles.cancelBtn} px-4 py-2 text-sm`}
-              >
-                Cancel
-              </Link>
-            </div>
-          </form>
+          {/* Title */}
+          <div className={styles.titleSection}>
+            <span className={styles.fieldLabel}>Title</span>
+            <input
+              id="title"
+              type="text"
+              value={title}
+              className={`${styles.titleInput} w-full`}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder="Note title..."
+            />
+          </div>
 
-          <div className="flex flex-col mh-150 gap-2">
-            <span className={`${styles.previewLabel} text-sm font-medium`}>
-              Preview
-            </span>
-            <div className={styles.previewBox}>
-              <h1 className="pb-5">{title || "Untitled"}</h1>
+          {/* Content */}
+          <div className={`${styles.contentSection} flex flex-col gap-1.5 flex-1`}>
+            <span className={styles.fieldLabel}>Content (Markdown)</span>
+            <textarea
+              id="content"
+              value={content}
+              className={`${styles.textarea} w-full flex-1 resize-none`}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="Note content..."
+            />
+          </div>
 
-              <div className={`prose ${styles.previewContent}`}>
-                <Markdown remarkPlugins={[remarkGfm]}>{content}</Markdown>
-              </div>
-              <div
-                className={`flex flex-row items-start gap-4 min-w-0 ${styles.tagContainer}`}
-              >
-                {tags.map((tag) => (
-                  <span key={tag} className={styles.tag}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
+          {/* Tags */}
+          <div className="flex flex-col gap-1.5">
+            <span className={styles.fieldLabel}>Tags</span>
+            <TagInput tags={tags} onChange={setTags} />
+          </div>
+
+          {/* Actions */}
+          <div className="flex gap-3">
+            <button
+              type="button"
+              className={`${styles.saveBtn} cursor-pointer`}
+              onClick={(e) => submit(e)}
+            >
+              Save
+            </button>
+            <Link to={cancelLocation} className={styles.cancelBtn}>
+              Cancel
+            </Link>
           </div>
         </div>
-      </article>
+
+        {/* Right — preview */}
+        <div className={`${styles.right} flex flex-col gap-4`}>
+          <span className={styles.fieldLabel}>Preview</span>
+          <div className={`${styles.previewBox} flex flex-col gap-4 flex-1`}>
+            <h1 className={styles.previewTitle}>{title || "Untitled"}</h1>
+            <div className={`prose ${styles.previewContent}`}>
+              <Markdown remarkPlugins={[remarkGfm]}>{content}</Markdown>
+            </div>
+            {tags.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
+                {tags.map((tag) => (
+                  <span key={tag} className={styles.tag}>#{tag}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+      </div>
     </div>
   );
 }
