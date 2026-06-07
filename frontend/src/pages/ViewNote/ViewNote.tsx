@@ -6,6 +6,7 @@ import styles from "./viewnote.module.scss";
 import { notes_api } from "@/shared/api/notes";
 import { useNote } from "@/shared/hooks/useNote";
 import { NotFound } from "@/shared/ui/NotFound";
+import { ViewNoteSkeleton } from "@/shared/ui/Skeleton/ViewNoteSkeleton";
 
 function calcReadTime(content: string): string {
   const words = content.trim().split(/\s+/).length;
@@ -24,7 +25,12 @@ export function ViewNote() {
   };
 
   if (!id) return <NotFound />;
-  if (loading) return null;
+  if (loading) return (
+    <div className="flex flex-col gap-6">
+      <BackArrow navigate="/notes" />
+      <ViewNoteSkeleton />
+    </div>
+  );
   if (!note) return <NotFound />;
 
   const dateStr = new Date(note.created_at).toLocaleDateString("en-US", {
