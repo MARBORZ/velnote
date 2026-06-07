@@ -37,6 +37,7 @@ export function EditNote() {
     <NoteForm
       location={`/notes/${id}`}
       cancelLocation={`/notes/${id}`}
+      backLabel="Back to note"
       title={title}
       content={content}
       tags={tags}
