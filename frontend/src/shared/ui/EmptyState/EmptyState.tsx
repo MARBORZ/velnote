@@ -1,14 +1,17 @@
-import { FileText } from "lucide-react";
+import { FileText, CirclePlus } from "lucide-react";
+import { Link } from "react-router";
 import styles from "./emptystate.module.scss";
 
 interface EmptyStateProps {
   title?: string;
   description?: string;
+  showAction?: boolean;
 }
 
 export function EmptyState({
   title = "No notes yet",
   description = "Create your first note to get started",
+  showAction = true,
 }: EmptyStateProps) {
   return (
     <div className={styles.wrapper}>
@@ -17,6 +20,12 @@ export function EmptyState({
       </div>
       <p className={styles.title}>{title}</p>
       <p className={styles.desc}>{description}</p>
+      {showAction && (
+        <Link to="/notes/new" className={styles.btn}>
+          <CirclePlus size={16} />
+          Create Note
+        </Link>
+      )}
     </div>
   );
 }
