@@ -23,7 +23,7 @@
   border: 1.5px solid $color-border;
   border-radius: $radius-xl;
   font-size: $font-sm;
-  background-color: $color-bg-secondary;
+  background-color: $color-bg-tertiary;
   color: $color-text;
   transition:
     border-color $transition-fast,
@@ -36,19 +36,19 @@
 
   &:focus {
     border-color: $color-primary;
-    background-color: $color-bg;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+    background-color: $color-bg-card;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
   }
 
   :global(html.dark) & {
-    background-color: $dark-bg-secondary;
+    background-color: $dark-bg-tertiary;
     color: $dark-text;
     border-color: $dark-border;
     &::placeholder { color: $dark-text-tertiary; }
     &:focus {
       border-color: $dark-primary;
-      background-color: $dark-bg-secondary;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+      background-color: $dark-bg-tertiary;
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
     }
   }
 }

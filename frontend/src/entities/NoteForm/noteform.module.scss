@@ -1,11 +1,12 @@
 @use "tokens" as *;
 
 .article {
+  background-color: $color-bg-card;
   border: 1px solid $color-border;
   border-radius: $radius-xl;
   box-shadow: $shadow-sm;
   :global(html.dark) & {
-    background-color: $dark-bg-secondary;
+    background-color: $dark-bg-card;
     border-color: $dark-border;
   }
 }
@@ -38,7 +39,7 @@
   &:focus { outline: none; border-color: $color-primary; }
   &::placeholder { color: $color-text-tertiary; }
   :global(html.dark) & {
-    background-color: $dark-bg-secondary;
+    background-color: $dark-bg-tertiary;
     color: $dark-text;
     border-color: $dark-border;
     &::placeholder { color: $dark-text-tertiary; }
@@ -81,7 +82,8 @@
 .previewBox {
   display: flex;
   flex-direction: column;
-  border: 1px solid $color-bg-secondary;
+  background-color: $color-bg-tertiary;
+  border: 1px solid $color-border;
   border-radius: $radius-md;
   padding: $space-4;
   height: 100%;
@@ -94,13 +96,13 @@
 .tag {
   font-size: $font-xs;
   font-weight: $font-medium;
-  color: $color-primary;
-  background: $color-bg-secondary;
+  color: $color-tag-text;
+  background: $color-tag-bg;
   border-radius: $radius-full;
   padding: 2px 10px;
   :global(html.dark) & {
-    background: $dark-bg-secondary;
-    color: $dark-primary;
+    background: $dark-tag-bg;
+    color: $dark-tag-text;
   }
 }
 
