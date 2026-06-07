@@ -7,18 +7,26 @@ import type { TNote } from "@/shared/types";
 import { CirclePlus } from "lucide-react";
 import styles from "./notes.module.scss";
 import { EmptyState } from "@/shared/ui/EmptyState/EmptyState";
+import { NoteCardSkeleton } from "@/shared/ui/Skeleton/NoteCardSkeleton";
 
 export function Notes() {
   const [notes, setNotes] = useState<TNote[]>([]);
+  const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+
   const filteredNotes = notes.filter(
     (n) =>
       n.title.toLowerCase().includes(search.toLowerCase()) ||
-      n.tags.some((tag: string) => tag.toLowerCase().includes(search.toLowerCase())),
+      n.tags.some((tag: string) =>
+        tag.toLowerCase().includes(search.toLowerCase()),
+      ),
   );
 
   useEffect(() => {
-    notes_api.getAll().then((res) => setNotes(res.data.notes));
+    notes_api.getAll().then((res) => {
+      setNotes(res.data.notes);
+      setLoading(false);
+    });
   }, []);
 
   return (
@@ -36,11 +44,21 @@ export function Notes() {
       <SearchBar onSearch={setSearch} />
 
       {/* Cards */}
-      {filteredNotes.length === 0 ? (
+      {loading ? (
+        <div className="flex flex-col gap-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <NoteCardSkeleton key={i} />
+          ))}
+        </div>
+      ) : filteredNotes.length === 0 ? (
         <div className="flex-1 flex items-center justify-center min-h-[50vh]">
           <EmptyState
             title={search ? "No notes found" : "No notes yet"}
-            description={search ? "Try a different search query" : "Create your first note to get started"}
+            description={
+              search
+                ? "Try a different search query"
+                : "Create your first note to get started"
+            }
             showAction={!search}
           />
         </div>

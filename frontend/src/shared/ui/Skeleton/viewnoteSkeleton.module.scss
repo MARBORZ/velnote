@@ -1,0 +1,47 @@
+@use "../../../app/styles/tokens" as *;
+
+.article {
+  background-color: $color-bg-card;
+  border: 1px solid $color-border;
+  border-radius: $radius-xl;
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+  padding: $space-10 $space-12;
+
+  :global(html.dark) & {
+    background-color: $dark-bg-card;
+    border-color: $dark-border;
+  }
+}
+
+.meta {
+  display: flex;
+  gap: $space-3;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: $color-border;
+
+  :global(html.dark) & {
+    background-color: $dark-border;
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.tags {
+  display: flex;
+  gap: $space-2;
+}
+
+.actions {
+  display: flex;
+  gap: $space-3;
+}

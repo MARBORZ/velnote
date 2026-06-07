@@ -1,0 +1,23 @@
+@use "../../../app/styles/tokens" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-5;
+  background-color: $color-bg-card;
+  border: 1px solid $color-border;
+  border-radius: $radius-xl;
+
+  :global(html.dark) & {
+    background-color: $dark-bg-card;
+    border-color: $dark-border;
+  }
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: $space-1;
+}
