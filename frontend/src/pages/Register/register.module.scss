@@ -1,49 +1,112 @@
 @use "tokens" as *;
 
+.page {
+  background: $color-bg-secondary;
+  min-height: 100vh;
+
+  :global(html.dark) & {
+    background: $dark-bg;
+  }
+}
+
 .card {
   background: $color-bg-card;
+  border: 1px solid $color-border;
   border-radius: $radius-2xl;
-  box-shadow: $shadow-lg;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
 
   :global(html.dark) & {
     background: $dark-bg-card;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+    border-color: $dark-border;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.logoIcon {
+  border-radius: 13px;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: $font-bold;
+  color: $color-text;
+  letter-spacing: -0.02em;
+
+  :global(html.dark) & {
+    color: $dark-text;
+  }
+}
+
+.subtitle {
+  font-size: $font-sm;
+  color: $color-text-secondary;
+
+  :global(html.dark) & {
+    color: $dark-text-secondary;
+  }
+}
+
+.label {
+  font-size: $font-sm;
+  font-weight: $font-medium;
+  color: $color-text-secondary;
+
+  :global(html.dark) & {
+    color: $dark-text-secondary;
   }
 }
 
 .input {
-  border: 1px solid $color-border;
-  border-radius: $radius-md;
+  border: 1.5px solid $color-border;
+  border-radius: $radius-lg;
+  font-size: $font-sm;
   color: $color-text;
-  background: $color-bg;
-  transition: border-color $transition-fast;
+  background: $color-bg-tertiary;
+  transition: border-color $transition-fast, background $transition-fast;
 
   &:focus {
     outline: none;
     border-color: $color-primary;
+    background: $color-bg-card;
   }
 
-  &::placeholder { color: $color-text-tertiary; }
+  &::placeholder {
+    color: $color-text-tertiary;
+  }
 
   :global(html.dark) & {
     background: $dark-bg-tertiary;
     border-color: $dark-border;
     color: $dark-text;
 
-    &::placeholder { color: $dark-text-tertiary; }
-    &:focus { border-color: $dark-primary; }
+    &::placeholder {
+      color: $dark-text-tertiary;
+    }
+
+    &:focus {
+      border-color: $dark-primary;
+      background: $dark-bg-secondary;
+    }
   }
 }
 
 .button {
   background: $color-primary;
-  color: $color-bg;
-  border-radius: $radius-md;
-  font-weight: $font-medium;
+  color: #fff;
+  border-radius: $radius-lg;
+  font-size: $font-sm;
+  font-weight: $font-semibold;
   transition: background $transition-fast;
+  border: none;
 
-  &:hover { background: $color-primary-hover; }
-  &:active { transform: scale(0.98); }
+  &:hover {
+    background: $color-primary-hover;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
 
   &:disabled {
     opacity: 0.5;
@@ -53,17 +116,37 @@
 
   :global(html.dark) & {
     background: $dark-primary;
-    &:hover { background: $dark-primary-hover; }
+
+    &:hover {
+      background: $dark-primary-hover;
+    }
   }
 }
 
-.passwordError { color: $color-error; }
+.passwordError {
+  color: $color-error;
+  font-size: $font-xs;
+}
 
-.page {
-  background: $color-bg-secondary;
-  min-height: 100vh;
+.footer {
+  font-size: 0.8125rem;
+  color: $color-text-tertiary;
 
   :global(html.dark) & {
-    background: $dark-bg;
+    color: $dark-text-tertiary;
+  }
+}
+
+.footerLink {
+  color: $color-primary;
+  font-weight: $font-semibold;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  :global(html.dark) & {
+    color: $dark-primary;
   }
 }

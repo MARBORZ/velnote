@@ -1,0 +1,37 @@
+@use "../../app/styles/tokens" as *;
+
+.pageTitle {
+  font-size: 2rem;
+  font-weight: $font-bold;
+  color: $color-text;
+  letter-spacing: -0.02em;
+
+  :global(html.dark) & {
+    color: $dark-text;
+  }
+}
+
+.newBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-4;
+  background: $color-primary;
+  color: #fff;
+  border-radius: $radius-lg;
+  font-size: $font-sm;
+  font-weight: $font-medium;
+  text-decoration: none;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: $color-primary-hover;
+  }
+
+  :global(html.dark) & {
+    background: $dark-primary;
+    &:hover {
+      background: $dark-primary-hover;
+    }
+  }
+}
