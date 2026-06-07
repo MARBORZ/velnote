@@ -35,7 +35,7 @@ export function NoteForm({
     <div className="flex flex-col gap-6 h-full">
       <BackArrow navigate={location} label={backLabel} />
 
-      <div className={`${styles.card} flex-1 grid grid-cols-2`}>
+      <div className={`${styles.card} flex-1 grid grid-cols-1 md:grid-cols-2`}>
 
         {/* Left — editor */}
         <div className={`${styles.left} flex flex-col gap-5`}>

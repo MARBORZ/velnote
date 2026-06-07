@@ -8,7 +8,11 @@
   display: flex;
   flex-direction: column;
   gap: $space-6;
-  padding: $space-10 $space-12;
+  padding: $space-8 $space-6;
+
+  @media (min-width: 768px) {
+    padding: $space-10 $space-12;
+  }
 
   :global(html.dark) & {
     background-color: $dark-bg-card;
