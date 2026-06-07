@@ -1,7 +1,5 @@
 @use "tokens" as *;
 
-// ── Overlay (mobile only) ────────────────────────────────────────────────────
-
 .overlay {
   position: fixed;
   inset: 0;
@@ -10,12 +8,8 @@
   z-index: 40;
   display: none;
 
-  @media (max-width: 767px) {
-    display: block;
-  }
+  @media (max-width: 767px) { display: block; }
 }
-
-// ── Sidebar ───────────────────────────────────────────────────────────────────
 
 .sidebar {
   width: 260px;
@@ -25,22 +19,16 @@
   top: 0;
   height: 100vh;
 
-  :global(html.dark) & {
-    background-color: $dark-bg-secondary;
-  }
+  :global(html.dark) & { background-color: $dark-bg-secondary; }
 
-  // Tablet
-  @media (max-width: 1023px) and (min-width: 768px) {
-    width: 220px;
-  }
+  @media (max-width: 1023px) and (min-width: 768px) { width: 220px; }
 
-  // Mobile: off-canvas drawer
   @media (max-width: 767px) {
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
-    width: 260px;
+    width: 280px;
     z-index: 50;
     transform: translateX(-100%);
     transition: transform 0.25s ease;
@@ -48,25 +36,29 @@
 }
 
 .sidebarOpen {
-  @media (max-width: 767px) {
-    transform: translateX(0);
-  }
+  @media (max-width: 767px) { transform: translateX(0); }
 }
-
-// ── Nav padding ───────────────────────────────────────────────────────────────
 
 .nav {
   padding: $space-6 $space-5;
 }
 
-// ── Logo ──────────────────────────────────────────────────────────────────────
+// ── Logo row ──────────────────────────────────────────────────────────────────
 
 .logoRow {
   display: flex;
   align-items: center;
-  gap: $space-3;
+  justify-content: space-between;
   margin-bottom: $space-8;
+}
+
+.logoLink {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
   text-decoration: none;
+
+  &:hover .logoText { color: $color-primary; }
 }
 
 .logoIcon {
@@ -81,9 +73,28 @@
   color: $color-text;
   transition: color $transition-fast;
 
-  .logoRow:hover & { color: $color-primary; }
-
   :global(html.dark) & { color: $dark-text; }
+}
+
+.closeBtn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: $radius-md;
+  background: $color-bg-tertiary;
+  color: $color-text-secondary;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  :global(html.dark) & {
+    background: $dark-bg-tertiary;
+    color: $dark-text-secondary;
+  }
+
+  @media (max-width: 767px) { display: flex; }
 }
 
 // ── Nav links ─────────────────────────────────────────────────────────────────
@@ -103,36 +114,23 @@
 
   svg { flex-shrink: 0; }
 
-  &:hover {
-    background: $color-bg-tertiary;
-    color: $color-text;
-  }
+  &:hover { background: $color-bg-tertiary; color: $color-text; }
 
   :global(html.dark) & {
     color: $dark-text-secondary;
-    &:hover {
-      background: $dark-bg-tertiary;
-      color: $dark-text;
-    }
+    &:hover { background: $dark-bg-tertiary; color: $dark-text; }
   }
 }
 
 .linkActive {
   background: $color-primary-light;
   color: $color-primary;
-
-  &:hover {
-    background: $color-primary-light;
-    color: $color-primary;
-  }
+  &:hover { background: $color-primary-light; color: $color-primary; }
 
   :global(html.dark) & {
     background: $dark-primary-light;
     color: $dark-primary;
-    &:hover {
-      background: $dark-primary-light;
-      color: $dark-primary;
-    }
+    &:hover { background: $dark-primary-light; color: $dark-primary; }
   }
 }
 
@@ -141,8 +139,58 @@
 .bottom {
   padding-top: $space-4;
   border-top: 1px solid $color-border;
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
 
   :global(html.dark) & { border-color: $dark-border; }
+}
+
+.userRow {
+  display: none;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-2 $space-3;
+  margin-bottom: $space-1;
+
+  @media (max-width: 767px) { display: flex; }
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-full;
+  background: $color-primary;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: $font-sm;
+  font-weight: $font-bold;
+  flex-shrink: 0;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.userName {
+  font-size: $font-sm;
+  font-weight: $font-medium;
+  color: $color-text;
+  :global(html.dark) & { color: $dark-text; }
+}
+
+.userEmail {
+  font-size: $font-xs;
+  color: $color-text-tertiary;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  :global(html.dark) & { color: $dark-text-tertiary; }
 }
 
 .logoutBtn {
@@ -164,16 +212,10 @@
 
   svg { flex-shrink: 0; }
 
-  &:hover {
-    color: $color-error;
-    background: rgba(239, 68, 68, 0.08);
-  }
+  &:hover { color: $color-error; background: rgba(239, 68, 68, 0.08); }
 
   :global(html.dark) & {
     color: $dark-text-secondary;
-    &:hover {
-      color: $dark-error;
-      background: rgba(244, 112, 103, 0.1);
-    }
+    &:hover { color: $dark-error; background: rgba(244, 112, 103, 0.1); }
   }
 }

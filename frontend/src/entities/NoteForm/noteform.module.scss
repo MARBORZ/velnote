@@ -37,6 +37,10 @@
   :global(html.dark) & {
     background-color: $dark-bg-secondary;
   }
+
+  @media (max-width: 767px) {
+    display: none;
+  }
 }
 
 // ── Field label ──────────────────────────────────────────────────────────────
