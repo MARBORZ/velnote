@@ -1,6 +1,7 @@
 @use "tokens" as *;
 
 .card {
+  background-color: $color-bg-card;
   border: 1px solid $color-border;
   border-radius: $radius-xl;
   box-shadow: $shadow-sm;
