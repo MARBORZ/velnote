@@ -1,64 +1,150 @@
 @use "tokens" as *;
 
 .article {
+  background-color: $color-bg-card;
   border: 1px solid $color-border;
   border-radius: $radius-xl;
-  box-shadow: $shadow-sm;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+  padding: $space-10 $space-12;
+
   :global(html.dark) & {
     background-color: $dark-bg-card;
     border-color: $dark-border;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  font-size: 0.8125rem;
+  color: $color-text-tertiary;
+
+  :global(html.dark) & {
+    color: $dark-text-tertiary;
+  }
+}
+
+.dot {
+  color: $color-border;
+
+  :global(html.dark) & {
+    color: $dark-border;
   }
 }
 
 .title {
+  font-size: 2.25rem;
+  font-weight: $font-bold;
   color: $color-text;
-  :global(html.dark) & { color: $dark-text; }
-}
+  letter-spacing: -0.025em;
+  line-height: 1.2;
 
-.tag {
-  background: $color-bg-tertiary;
-  color: $color-text-secondary;
-  border-radius: $radius-full;
   :global(html.dark) & {
-    background: $dark-bg-tertiary;
-    color: $dark-text-secondary;
+    color: $dark-text;
   }
 }
 
-.date {
-  color: $color-text-tertiary;
-  :global(html.dark) & { color: $dark-text-tertiary; }
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: $color-border;
+
+  :global(html.dark) & {
+    background-color: $dark-border;
+  }
+}
+
+.body {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: $color-text;
+
+  :global(html.dark) & {
+    color: $dark-text;
+  }
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  padding-top: $space-2;
+}
+
+.tag {
+  font-size: $font-xs;
+  font-weight: $font-medium;
+  color: $color-tag-text;
+  background: $color-tag-bg;
+  border-radius: $radius-full;
+  padding: 3px 10px;
+
+  :global(html.dark) & {
+    background: $dark-tag-bg;
+    color: $dark-tag-text;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: $space-3;
 }
 
 .editBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: $space-2 $space-5;
   background: $color-primary;
-  color: $color-bg;
-  border-radius: $radius-md;
+  color: #fff;
+  border-radius: $radius-lg;
+  font-size: $font-sm;
   font-weight: $font-medium;
+  text-decoration: none;
   transition: background $transition-fast;
-  &:hover { background: $color-primary-hover; }
+
+  &:hover {
+    background: $color-primary-hover;
+  }
+
   :global(html.dark) & {
     background: $dark-primary;
-    color: #fff;
-    &:hover { background: $dark-primary-hover; }
+
+    &:hover {
+      background: $dark-primary-hover;
+    }
   }
 }
 
 .deleteBtn {
-  border: 1px solid $color-border;
+  display: inline-flex;
+  align-items: center;
+  padding: $space-2 $space-5;
+  background: transparent;
+  border: 1.5px solid $color-border;
   color: $color-error;
-  border-radius: $radius-md;
+  border-radius: $radius-lg;
+  font-size: $font-sm;
   font-weight: $font-medium;
+  cursor: pointer;
   transition: background $transition-fast, border-color $transition-fast;
+
   &:hover {
-    background: rgba(239, 68, 68, 0.1);
+    background: rgba(239, 68, 68, 0.06);
     border-color: $color-error;
   }
+
   :global(html.dark) & {
     border-color: $dark-border;
+    color: $dark-error;
+
     &:hover {
-      background: rgba(239, 68, 68, 0.1);
-      border-color: $color-error;
+      background: rgba(244, 112, 103, 0.08);
+      border-color: $dark-error;
     }
   }
 }
