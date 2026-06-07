@@ -37,7 +37,7 @@ export function Notes() {
 
       {/* Cards */}
       {filteredNotes.length === 0 ? (
-        <div className="flex-1 flex items-center justify-center min-h-[50vh]">
+        <div className="flex-1 flex items-center justify-center min-h-(50vh)">
           <EmptyState
             title={search ? "No notes found" : "No notes yet"}
             description={search ? "Try a different search query" : "Create your first note to get started"}
