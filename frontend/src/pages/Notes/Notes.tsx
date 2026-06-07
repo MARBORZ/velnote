@@ -25,7 +25,7 @@ export function Notes() {
     <div className="flex flex-col gap-8">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className={styles.pageTitle}>Your Notes</h1>
+        <h1 className={styles.pageTitle}>My Notes</h1>
         <Link to="/notes/new" className={styles.newBtn}>
           <CirclePlus size={16} />
           New Note
@@ -40,6 +40,7 @@ export function Notes() {
         <EmptyState
           title={search ? "No notes found" : "No notes yet"}
           description={search ? "Try a different search query" : "Create your first note to get started"}
+          showAction={!search}
         />
       ) : (
         <div className="flex flex-col gap-4">
