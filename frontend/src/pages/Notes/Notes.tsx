@@ -6,6 +6,7 @@ import { notes_api } from "@/shared/api/notes";
 import type { TNote } from "@/shared/types";
 import { CirclePlus } from "lucide-react";
 import styles from "./notes.module.scss";
+import { EmptyState } from "@/shared/ui/EmptyState/EmptyState";
 
 export function Notes() {
   const [notes, setNotes] = useState<TNote[]>([]);
@@ -35,13 +36,20 @@ export function Notes() {
       <SearchBar onSearch={setSearch} />
 
       {/* Cards */}
-      <div className="flex flex-col gap-4">
-        {filteredNotes.map((n) => (
-          <Link key={n.id} to={`/notes/${n.id}`}>
-            <Note note={n} />
-          </Link>
-        ))}
-      </div>
+      {filteredNotes.length === 0 ? (
+        <EmptyState
+          title={search ? "No notes found" : "No notes yet"}
+          description={search ? "Try a different search query" : "Create your first note to get started"}
+        />
+      ) : (
+        <div className="flex flex-col gap-4">
+          {filteredNotes.map((n) => (
+            <Link key={n.id} to={`/notes/${n.id}`}>
+              <Note note={n} />
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

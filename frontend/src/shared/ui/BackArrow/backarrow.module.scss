@@ -1,0 +1,24 @@
+@use "../../../app/styles/tokens" as *;
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8125rem;
+  font-weight: $font-medium;
+  color: $color-text-tertiary;
+  text-decoration: none;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-text-secondary;
+  }
+
+  :global(html.dark) & {
+    color: $dark-text-tertiary;
+
+    &:hover {
+      color: $dark-text-secondary;
+    }
+  }
+}
