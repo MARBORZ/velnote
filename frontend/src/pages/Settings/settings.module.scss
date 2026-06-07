@@ -1,5 +1,12 @@
 @use "../../app/styles/tokens" as *;
 
+.headingCentered {
+  width: 640px;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .heading {
   font-size: 2rem;
   font-weight: $font-bold;
@@ -17,6 +24,8 @@
   gap: $space-4;
   width: 640px;
   max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 // ── Section label ─────────────────────────────────────────────────────────────
