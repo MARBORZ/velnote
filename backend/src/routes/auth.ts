@@ -13,7 +13,7 @@ const registerUser: RequestHandler = async (req, res) => {
   const result = userSchema.safeParse(req.body);
 
   if (!result.success)
-    return res.json({ status: 401, message: "Fail to register." });
+    return res.status(401).json({ message: "Fail to register." });
 
   const { email, password } = result.data;
 
@@ -23,8 +23,7 @@ const registerUser: RequestHandler = async (req, res) => {
   );
 
   if (existing.rows.length > 0)
-    return res.json({
-      status: 404,
+    return res.status(409).json({
       message:
         "We have this email in out Database. Please try again with another one.",
     });
@@ -45,12 +44,11 @@ const registerUser: RequestHandler = async (req, res) => {
 
   const user = rows[0];
 
-  if (!user) return res.json({ status: 401, message: "Can`t find user." });
+  if (!user) return res.status(401).json({ message: "Can`t find user." });
 
   const { password: _, ...safeUser } = user;
 
-  return res.json({
-    status: 200,
+  return res.status(200).json({
     message: "OK",
     user: safeUser,
   });
@@ -62,7 +60,7 @@ const loginUser: RequestHandler = async (req, res) => {
   const result = userSchema.safeParse(req.body);
 
   if (!result.success)
-    return res.json({ status: 401, message: "Fail to login." });
+    return res.status(401).json({ message: "Fail to login." });
 
   const { email, password } = result.data;
 
@@ -72,11 +70,12 @@ const loginUser: RequestHandler = async (req, res) => {
   );
 
   const user = rows[0];
-  if (!user) return res.json({ status: 404, message: "No user found." });
+  if (!user) return res.status(404).json({ message: "No user found." });
 
   const comparePassword = await bcrypt.compare(password, user?.password);
   if (comparePassword) {
-    if (!process.env.JWT_TOKEN) return;
+    if (!process.env.JWT_TOKEN)
+      return res.status(500).json({ message: "Server config error" });
 
     const token = jwt.sign(
       { userId: user.id, email: user.email, role: user.role },
@@ -84,14 +83,12 @@ const loginUser: RequestHandler = async (req, res) => {
       { expiresIn: "7d" },
     );
 
-    return res.json({
-      status: 200,
+    return res.status(200).json({
       message: `Welcome, ${user?.email || "User"}.`,
       token: token,
     });
   } else {
-    return res.json({
-      status: 401,
+    return res.status(401).json({
       message: "Failed to login. Check password or email.",
     });
   }

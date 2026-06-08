@@ -9,41 +9,41 @@ export const notesRouter = Router();
 // GET NOTES
 const getNotes: RequestHandler = async (req, res) => {
   const userId = req.user?.userId;
-  if (!userId) return res.json({ status: 401, message: "Unauthorized" });
+  if (!userId) return res.status(401).json({ message: "Unauthorized" });
 
   const { rows } = await pool.query("SELECT * FROM notes WHERE user_id = $1", [
     userId,
   ]);
 
-  return res.json({ status: 200, message: "OK", notes: rows });
+  return res.status(200).json({ message: "OK", notes: rows });
 };
 notesRouter.get("/", tryCatch(getNotes));
 
 // GET NOTE
 const getNote: RequestHandler = async (req, res) => {
   const userId = req.user?.userId;
-  if (!userId) return res.json({ status: 401, message: "Unauthorized" });
+  if (!userId) return res.status(401).json({ message: "Unauthorized" });
   const { id } = req.params;
 
   const { rows } = await pool.query("SELECT * FROM notes WHERE id = $1", [id]);
   const note = rows[0];
 
-  if (!note) return res.json({ status: 404, message: "Can`t find note." });
+  if (!note) return res.status(404).json({ message: "Can`t find note." });
   if (note.user_id !== userId)
-    return res.json({ status: 403, message: "Forbidden" });
+    return res.status(403).json({ message: "Forbidden" });
 
-  return res.json({ status: 200, message: "OK", note: note });
+  return res.status(200).json({ message: "OK", note: note });
 };
 notesRouter.get("/:id", tryCatch(getNote));
 
 // POST NOTE
 const postNote: RequestHandler = async (req, res) => {
   const userId = req.user?.userId;
-  if (!userId) return res.json({ status: 401, message: "Unauthorized" });
+  if (!userId) return res.status(401).json({ message: "Unauthorized" });
 
   const result = noteSchema.safeParse(req.body);
   if (!result.success)
-    return res.json({ status: 400, message: "Can`t post note." });
+    return res.status(400).json({ message: "Can`t post note." });
 
   const { title, content, tags } = result.data;
 
@@ -57,22 +57,22 @@ const postNote: RequestHandler = async (req, res) => {
   );
   const note = rows[0];
   if (!note)
-    return res.json({ status: 401, message: "Failed to add a new note." });
+    return res.status(401).json({ message: "Failed to add a new note." });
 
-  return res.json({ status: 201, message: "OK", note: note });
+  return res.status(201).json({ message: "OK", note: note });
 };
 notesRouter.post("/", tryCatch(postNote));
 
 // EDIT NOTE
 const editNote: RequestHandler = async (req, res) => {
   const userId = req.user?.userId;
-  if (!userId) return res.json({ status: 401, message: "Unauthorized" });
+  if (!userId) return res.status(401).json({ message: "Unauthorized" });
 
   const { id } = req.params;
 
   const result = noteSchema.safeParse(req.body);
   if (!result.success)
-    return res.json({ status: 400, message: "Invalid note data." });
+    return res.status(400).json({ message: "Invalid note data." });
   const { title, content, tags } = result.data;
 
   const existing = await pool.query("SELECT user_id FROM notes WHERE id = $1", [
@@ -81,9 +81,9 @@ const editNote: RequestHandler = async (req, res) => {
   const existingNote = existing.rows[0];
 
   if (!existingNote)
-    return res.json({ status: 404, message: "Note not found." });
+    return res.status(404).json({ message: "Note not found." });
   if (existingNote.user_id !== userId)
-    return res.json({ status: 403, message: "Forbidden" });
+    return res.status(403).json({ message: "Forbidden" });
 
   const { rows } = await pool.query(
     `
@@ -96,16 +96,16 @@ const editNote: RequestHandler = async (req, res) => {
   );
 
   const note = rows[0];
-  if (!note) return res.json({ status: 404, message: "Note not found." });
+  if (!note) return res.status(404).json({ message: "Note not found." });
 
-  return res.json({ status: 200, message: "OK", note: note });
+  return res.status(200).json({ message: "OK", note: note });
 };
 notesRouter.put("/:id", tryCatch(editNote));
 
 // DELETE NOTE
 const deleteNote: RequestHandler = async (req, res) => {
   const userId = req.user?.userId;
-  if (!userId) return res.json({ status: 401, message: "Unauthorized" });
+  if (!userId) return res.status(401).json({ message: "Unauthorized" });
 
   const { id } = req.params;
 
@@ -115,12 +115,12 @@ const deleteNote: RequestHandler = async (req, res) => {
   );
   const note = existing.rows[0];
 
-  if (!note) return res.json({ status: 404, message: "Note not found." });
+  if (!note) return res.status(404).json({ message: "Note not found." });
   if (note.user_id !== userId)
-    return res.json({ status: 403, message: "Forbidden" });
+    return res.status(403).json({ message: "Forbidden" });
 
   await pool.query("DELETE FROM notes WHERE id = $1", [id]);
 
-  return res.json({ status: 200, message: "OK" });
+  return res.status(200).json({ message: "OK" });
 };
 notesRouter.delete("/:id", tryCatch(deleteNote));
