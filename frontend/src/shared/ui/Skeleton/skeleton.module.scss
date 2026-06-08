@@ -9,19 +9,19 @@
   display: block;
   background: linear-gradient(
     90deg,
-    $color-bg-secondary 25%,
-    $color-bg-tertiary 50%,
-    $color-bg-secondary 75%
+    $color-bg-tertiary 25%,
+    $color-border 50%,
+    $color-bg-tertiary 75%
   );
   background-size: 600px 100%;
-  animation: shimmer 1.4s ease-in-out infinite;
+  animation: shimmer 1.6s ease-in-out infinite;
 
   :global(html.dark) & {
     background: linear-gradient(
       90deg,
-      $dark-bg-secondary 25%,
-      $dark-bg-tertiary 50%,
-      $dark-bg-secondary 75%
+      $dark-bg-tertiary 25%,
+      $dark-border 50%,
+      $dark-bg-tertiary 75%
     );
     background-size: 600px 100%;
   }
