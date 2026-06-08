@@ -20,7 +20,7 @@ export function Layout({ children }: LayoutProps) {
         <TopBar onMenuClick={() => setSidebarOpen(true)} />
 
         {/* Main content */}
-        <main className="flex-1 flex flex-col py-8 px-10 max-md:px-4 max-md:py-5 max-md:pb-20">
+        <main className="flex-1 flex flex-col py-8 px-10 max-md:px-4 max-md:py-5 max-md:pb-28">
           {children}
         </main>
       </div>
