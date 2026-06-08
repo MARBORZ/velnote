@@ -11,9 +11,10 @@ const corsOptions = {
   origin: "http://localhost:5173",
 };
 
+app.use(cors(corsOptions));
+
 // JSON PARSER MIDDLEWARE
 app.use(json());
-app.use(cors(corsOptions));
 
 // NOTES
 app.use("/api/notes", verifyJWT, notesRouter);
@@ -23,5 +24,5 @@ app.use("/api/auth", authRouter);
 
 // BASE
 app.get("/", (req: Request, res: Response) => {
-  res.json({ status: 200, message: "Go to /api/notes" });
+  res.status(200).json({ message: "Go to /api/notes" });
 });

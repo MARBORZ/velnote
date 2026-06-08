@@ -7,8 +7,7 @@ export const tryCatch =
       return await fn(req, res, next);
     } catch (error) {
       console.log(error);
-      return res.json({
-        status: 500,
+      return res.status(500).json({
         message: `Internal server error.`,
       });
     }
