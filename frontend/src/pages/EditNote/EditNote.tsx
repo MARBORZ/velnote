@@ -4,6 +4,9 @@ import { useNavigate, useParams } from "react-router";
 import { NoteForm } from "@/entities/NoteForm";
 import { notes_api } from "@/shared/api/notes";
 import { useNote } from "@/shared/hooks/useNote";
+import { withMinDelay } from "@/shared/lib/withMinDelay";
+import { NoteFormSkeleton } from "@/shared/ui/Skeleton/NoteFormSkeleton";
+import { BackArrow } from "@/shared/ui/BackArrow/BackArrow";
 
 export function EditNote() {
   const navigate = useNavigate();
@@ -23,13 +26,18 @@ export function EditNote() {
   }, [note]);
 
   if (!id) return <NotFound />;
-  if (loading) return null;
+  if (loading) return (
+    <div className="flex flex-col gap-6 h-full">
+      <BackArrow navigate="/notes" label="Back to note" />
+      <NoteFormSkeleton />
+    </div>
+  );
   if (!note) return <NotFound />;
 
   const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (!title || !content || !tags.length) return;
-    await notes_api.update(+id, title, content, tags);
+    await withMinDelay(notes_api.update(+id, title, content, tags));
     navigate("/notes");
   };
 

@@ -1,0 +1,70 @@
+@use "../../../app/styles/tokens" as *;
+
+.card {
+  background-color: $color-bg-card;
+  border: 1px solid $color-border;
+  border-radius: $radius-xl;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex: 1;
+
+  :global(html.dark) & {
+    background-color: $dark-bg-card;
+    border-color: $dark-border;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+  background-color: $color-bg-card;
+  border-right: 1px solid $color-border;
+  padding: $space-8;
+
+  :global(html.dark) & {
+    background-color: $dark-bg-card;
+    border-color: $dark-border;
+  }
+
+  @media (max-width: 767px) {
+    border-right: none;
+    padding: $space-5;
+  }
+}
+
+.titleSection,
+.contentSection,
+.tagsSection {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.actions {
+  display: flex;
+  gap: $space-3;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  background-color: $color-bg-secondary;
+  padding: $space-8;
+
+  :global(html.dark) & {
+    background-color: $dark-bg-secondary;
+  }
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
