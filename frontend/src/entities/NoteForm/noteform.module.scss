@@ -9,6 +9,8 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
   overflow: hidden;
   min-height: 0;
+  width: 100%;
+  max-width: 100%;
 
   :global(html.dark) & {
     background-color: $dark-bg-card;
@@ -23,10 +25,16 @@
   background-color: $color-bg-card;
   border-right: 1px solid $color-border;
   padding: $space-8;
+  min-width: 0;
 
   :global(html.dark) & {
     background-color: $dark-bg-card;
     border-color: $dark-border;
+  }
+
+  @media (max-width: 767px) {
+    border-right: none;
+    padding: $space-5;
   }
 }
 
@@ -80,6 +88,12 @@
   outline: none;
   background: transparent;
   letter-spacing: -0.02em;
+  width: 100%;
+  min-width: 0;
+
+  @media (max-width: 767px) {
+    font-size: 1.25rem;
+  }
 
   &::placeholder {
     color: $color-text-tertiary;
@@ -110,7 +124,14 @@
   border-radius: $radius-lg;
   padding: $space-4;
   min-height: 240px;
+  width: 100%;
+  box-sizing: border-box;
   transition: border-color $transition-fast;
+
+  @media (max-width: 767px) {
+    min-height: 200px;
+    font-size: 0.8125rem;
+  }
 
   &:focus {
     outline: none;
