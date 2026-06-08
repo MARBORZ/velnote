@@ -1,4 +1,4 @@
-# Notes App
+# Velnote
 
 A fullstack note-taking application with tags, search, and markdown rendering.
 
@@ -81,7 +81,7 @@ A web app for managing personal notes:
 ## Project Structure
 
 ```
-notes-app/
+velnote/
 ├── frontend/    — React app (FSD architecture)
 ├── backend/     — Express REST API
 └── README.md
