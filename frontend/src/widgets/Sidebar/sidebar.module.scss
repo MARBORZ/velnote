@@ -21,6 +21,10 @@
 
   :global(html.dark) & { background-color: $dark-bg-secondary; }
 
+  @media (min-width: 1024px) {
+    width: 260px;
+  }
+
   @media (max-width: 767px) {
     position: fixed;
     top: 0;
@@ -40,7 +44,7 @@
 .nav {
   padding: $space-6 $space-3;
 
-  @media (max-width: 767px) {
+  @media (max-width: 767px), (min-width: 1024px) {
     padding: $space-6 $space-5;
   }
 }
@@ -55,6 +59,10 @@
 
   @media (max-width: 767px) {
     justify-content: space-between;
+  }
+
+  @media (min-width: 1024px) {
+    justify-content: flex-start;
   }
 }
 
@@ -80,7 +88,7 @@
   transition: color $transition-fast;
   display: none;
 
-  @media (max-width: 767px) { display: block; }
+  @media (max-width: 767px), (min-width: 1024px) { display: block; }
 
   :global(html.dark) & { color: $dark-text; }
 }
@@ -133,7 +141,7 @@
     &:hover { background: $dark-bg-tertiary; color: $dark-text; }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 767px), (min-width: 1024px) {
     justify-content: flex-start;
     padding: $space-2 $space-3;
     span { display: inline; }
@@ -164,7 +172,7 @@
 
   :global(html.dark) & { border-color: $dark-border; }
 
-  @media (max-width: 767px) {
+  @media (max-width: 767px), (min-width: 1024px) {
     align-items: stretch;
   }
 }
@@ -245,7 +253,7 @@
     &:hover { color: $dark-error; background: rgba(244, 112, 103, 0.1); }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 767px), (min-width: 1024px) {
     justify-content: flex-start;
     padding: $space-2 $space-3;
     span { display: inline; }
