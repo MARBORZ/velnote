@@ -11,6 +11,16 @@
   }
 }
 
+.errorLabel {
+  font-size: $font-sm;
+  font-weight: $font-medium;
+  color: $color-error;
+
+  :global(html.dark) & {
+    color: $dark-error;
+  }
+}
+
 .newBtn {
   display: inline-flex;
   align-items: center;
