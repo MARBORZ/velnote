@@ -5,6 +5,7 @@ import { TagInput } from "@/shared/ui/TagInput";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Link } from "react-router";
+import { ErrorLabel } from "@/shared/ui/ErrorLabel/ErrorLabel";
 
 interface NoteFormProps {
   location: string;
@@ -35,7 +36,7 @@ export function NoteForm({
 }: NoteFormProps) {
   return (
     <div className="flex flex-col gap-6 h-full">
-      <BackArrow navigate={location} label={backLabel} />
+      <BackArrow navigateTo={location} label={backLabel} />
 
       <div className={`${styles.card} flex-1 grid grid-cols-1 md:grid-cols-2 max-md:grid-cols-1`}>
 
@@ -74,7 +75,7 @@ export function NoteForm({
           </div>
 
           {/* Actions */}
-          {error && <span className={styles.errorLabel}>{error}</span>}
+          <ErrorLabel error={error} />
           <div className="flex gap-3">
             <button
               type="button"

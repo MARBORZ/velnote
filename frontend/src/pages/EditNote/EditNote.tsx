@@ -5,6 +5,7 @@ import { NoteForm } from "@/entities/NoteForm";
 import { notes_api } from "@/shared/api/notes";
 import { useNote } from "@/shared/hooks/useNote";
 import { withMinDelay } from "@/shared/lib/withMinDelay";
+import { getErrorMessage } from "@/shared/lib/getErrorMessage";
 import { NoteFormSkeleton } from "@/shared/ui/Skeleton/NoteFormSkeleton";
 import { BackArrow } from "@/shared/ui/BackArrow/BackArrow";
 
@@ -30,7 +31,7 @@ export function EditNote() {
   if (loading)
     return (
       <div className="flex flex-col gap-6 h-full">
-        <BackArrow navigate="/notes" label="Back to note" />
+        <BackArrow navigateTo="/notes" label="Back to note" />
         <NoteFormSkeleton />
       </div>
     );
@@ -43,10 +44,8 @@ export function EditNote() {
     try {
       await withMinDelay(notes_api.update(+id, title, content, tags));
       navigate("/notes");
-    } catch (e: any) {
-      const errorMessage =
-        e?.response?.data?.message ?? "Something went wrong.";
-      return setSubmitError(errorMessage);
+    } catch (e) {
+      setSubmitError(getErrorMessage(e));
     }
   };
 

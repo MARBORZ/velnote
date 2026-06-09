@@ -11,9 +11,10 @@ const getNotes: RequestHandler = async (req, res) => {
   const userId = req.user?.userId;
   if (!userId) return res.status(401).json({ message: "Unauthorized" });
 
-  const { rows } = await pool.query("SELECT * FROM notes WHERE user_id = $1", [
-    userId,
-  ]);
+  const { rows } = await pool.query(
+    "SELECT id, title, content, tags, created_at, updated_at FROM notes WHERE user_id = $1",
+    [userId],
+  );
 
   return res.status(200).json({ message: "OK", notes: rows });
 };
@@ -25,7 +26,10 @@ const getNote: RequestHandler = async (req, res) => {
   if (!userId) return res.status(401).json({ message: "Unauthorized" });
   const { id } = req.params;
 
-  const { rows } = await pool.query("SELECT * FROM notes WHERE id = $1", [id]);
+  const { rows } = await pool.query(
+    "SELECT id, user_id, title, content, tags, created_at, updated_at FROM notes WHERE id = $1",
+    [id],
+  );
   const note = rows[0];
 
   if (!note) return res.status(404).json({ message: "Can`t find note." });
@@ -57,7 +61,7 @@ const postNote: RequestHandler = async (req, res) => {
   );
   const note = rows[0];
   if (!note)
-    return res.status(401).json({ message: "Failed to add a new note." });
+    return res.status(500).json({ message: "Failed to add a new note." });
 
   return res.status(201).json({ message: "OK", note: note });
 };

@@ -7,8 +7,11 @@ import { verifyJWT } from "./middleware/auth.js";
 
 export const app = express();
 
+const state = process.env.STATE === "dev" ? "dev" : "prod";
+const allowed = (process.env.CORS_ORIGIN ?? "").split(",");
+
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: state === "dev" ? "http://localhost:5173" : allowed,
 };
 
 app.use(cors(corsOptions));

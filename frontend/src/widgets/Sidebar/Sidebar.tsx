@@ -3,6 +3,7 @@ import { FileText, CirclePlus, Settings, LogOut, X } from "lucide-react";
 import styles from "./sidebar.module.scss";
 import { logout } from "@/shared/lib/logout";
 import { useUser } from "@/shared/hooks/useUser";
+import { isNotesActive } from "@/shared/lib/isNotesActive";
 import logoIcon from "@/shared/ui/Logo/logo.svg";
 
 interface SidebarProps {
@@ -16,9 +17,6 @@ export function Sidebar({ open = false, onClose }: SidebarProps) {
   const user = useUser();
   const role = user.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : "User";
 
-  const isNotesActive =
-    pathname === "/notes" ||
-    (pathname.startsWith("/notes/") && !pathname.startsWith("/notes/new"));
   const isActive = (href: string) =>
     pathname === href || pathname.startsWith(href + "/");
 
@@ -45,7 +43,7 @@ export function Sidebar({ open = false, onClose }: SidebarProps) {
             <li>
               <Link
                 to="/notes"
-                className={`${styles.link} ${isNotesActive ? styles.linkActive : ""}`}
+                className={`${styles.link} ${isNotesActive(pathname) ? styles.linkActive : ""}`}
                 onClick={onClose}
               >
                 <FileText size={18} />

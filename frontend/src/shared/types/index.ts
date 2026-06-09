@@ -7,10 +7,6 @@ export interface TNote {
   updated_at: string;
 }
 
-export interface Tag {
-  id: number;
-  name: string;
-}
 
 export interface User {
   id: number;

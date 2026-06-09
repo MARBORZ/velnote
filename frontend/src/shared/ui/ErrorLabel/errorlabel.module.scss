@@ -1,0 +1,12 @@
+@use "../../../app/styles/tokens" as *;
+
+.label {
+  display: block;
+  font-size: $font-xs;
+  font-weight: $font-medium;
+  color: $color-error;
+
+  :global(html.dark) & {
+    color: $dark-error;
+  }
+}

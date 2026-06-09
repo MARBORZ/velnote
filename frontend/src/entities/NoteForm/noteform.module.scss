@@ -157,18 +157,6 @@
   }
 }
 
-// ── Error label ───────────────────────────────────────────────────────────────
-
-.errorLabel {
-  font-size: $font-xs;
-  color: $color-error;
-  font-weight: $font-medium;
-
-  :global(html.dark) & {
-    color: $dark-error;
-  }
-}
-
 // ── Actions ───────────────────────────────────────────────────────────────────
 
 .saveBtn {
