@@ -51,8 +51,12 @@
   background: $color-primary;
   color: #fff;
 
+  svg { opacity: 0.95; filter: brightness(1.3); }
+
   :global(html.dark) & {
     background: $dark-primary;
     color: #fff;
+
+    svg { opacity: 1; filter: brightness(1.4); }
   }
 }
