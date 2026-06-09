@@ -9,6 +9,8 @@ import styles from "./notes.module.scss";
 import { EmptyState } from "@/shared/ui/EmptyState/EmptyState";
 import { NoteCardSkeleton } from "@/shared/ui/Skeleton/NoteCardSkeleton";
 import { withMinDelay } from "@/shared/lib/withMinDelay";
+import { ErrorLabel } from "@/shared/ui/ErrorLabel/ErrorLabel";
+import { getErrorMessage } from "@/shared/lib/getErrorMessage";
 
 export function Notes() {
   const [notes, setNotes] = useState<TNote[]>([]);
@@ -25,16 +27,18 @@ export function Notes() {
   );
 
   useEffect(() => {
-    try {
-      withMinDelay(notes_api.getAll()).then((res) => {
-        setNotes(res.data.notes);
-      });
-    } catch (e: any) {
-      const errorMessage = e.response?.data?.message ?? "Something went wrong.";
-      setError(errorMessage);
-    } finally {
-      setLoading(false);
-    }
+    const fetch = async () => {
+      try {
+        const res = await withMinDelay(notes_api.getAll());
+        setNotes(res.data?.notes);
+      } catch (e) {
+        setError(getErrorMessage(e));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetch();
   }, []);
 
   return (
@@ -51,8 +55,7 @@ export function Notes() {
       {/* Search */}
       <SearchBar onSearch={setSearch} />
 
-      {/* Error */}
-      {error && <span className={styles.errorLabel}>{error}</span>}
+      <ErrorLabel error={error} />
 
       {/* Cards */}
       {loading ? (

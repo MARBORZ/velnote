@@ -3,6 +3,8 @@ import { useState } from "react";
 import styles from "./register.module.scss";
 import { auth } from "@/shared/api/auth";
 import logoIcon from "@/shared/ui/Logo/logo.svg";
+import { ErrorLabel } from "@/shared/ui/ErrorLabel/ErrorLabel";
+import { getErrorMessage } from "@/shared/lib/getErrorMessage";
 
 export function Register() {
   const navigate = useNavigate();
@@ -16,8 +18,12 @@ export function Register() {
   const handleSubmit = async (formData: FormData) => {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-    await auth.register(email, password);
-    navigate("/login");
+    try {
+      await auth.register(email, password);
+      navigate("/login");
+    } catch (e) {
+      setError(getErrorMessage(e));
+    }
   };
 
   return (
@@ -93,9 +99,7 @@ export function Register() {
             </span>
           )}
 
-          {error && (
-            <span className={styles.errorLabel}>{error}</span>
-          )}
+          <ErrorLabel error={error} />
 
           <button
             type="submit"

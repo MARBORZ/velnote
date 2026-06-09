@@ -13,7 +13,7 @@ const registerUser: RequestHandler = async (req, res) => {
   const result = userSchema.safeParse(req.body);
 
   if (!result.success)
-    return res.status(401).json({ message: "Fail to register." });
+    return res.status(400).json({ message: "Fail to register." });
 
   const { email, password } = result.data;
 
@@ -25,7 +25,7 @@ const registerUser: RequestHandler = async (req, res) => {
   if (existing.rows.length > 0)
     return res.status(409).json({
       message:
-        "We have this email in out Database. Please try again with another one.",
+        "We have this email in our Database. Please try again with another one.",
     });
 
   const hashedPassword = await bcrypt.hash(
@@ -44,11 +44,11 @@ const registerUser: RequestHandler = async (req, res) => {
 
   const user = rows[0];
 
-  if (!user) return res.status(401).json({ message: "Can`t find user." });
+  if (!user) return res.status(500).json({ message: "Failed to create user." });
 
   const { password: _, ...safeUser } = user;
 
-  return res.status(200).json({
+  return res.status(201).json({
     message: "OK",
     user: safeUser,
   });
@@ -60,7 +60,7 @@ const loginUser: RequestHandler = async (req, res) => {
   const result = userSchema.safeParse(req.body);
 
   if (!result.success)
-    return res.status(401).json({ message: "Fail to login." });
+    return res.status(400).json({ message: "Fail to login." });
 
   const { email, password } = result.data;
 
@@ -85,7 +85,7 @@ const loginUser: RequestHandler = async (req, res) => {
 
     return res.status(200).json({
       message: `Welcome, ${user?.email || "User"}.`,
-      token: token,
+      token,
     });
   } else {
     return res.status(401).json({

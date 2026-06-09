@@ -24,6 +24,10 @@
   :global(html.dark) & { color: $dark-text; }
 }
 
+.titleSize {
+  font-size: $font-base;
+}
+
 .preview {
   color: $color-text-secondary;
   :global(html.dark) & { color: $dark-text-secondary; }

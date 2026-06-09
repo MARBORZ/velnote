@@ -27,7 +27,7 @@ export function Settings() {
 
   return (
     <div className="flex flex-col gap-6">
-      <BackArrow navigate="/notes" />
+      <BackArrow navigateTo="/notes" />
 
       <h1 className={`${styles.heading} ${styles.headingCentered}`}>Settings</h1>
 
@@ -36,7 +36,7 @@ export function Settings() {
         {/* Profile */}
         <span className={styles.sectionLabel}>Profile</span>
         <div className={styles.card}>
-          <div className={styles.avatar}>{user.email[0].toUpperCase()}</div>
+          <div className={styles.avatar}>{user.email?.[0]?.toUpperCase() ?? "?"}</div>
           <div className={styles.userInfo}>
             <span className={styles.email}>{user.email}</span>
             <span className={styles.role}>{user.role}</span>

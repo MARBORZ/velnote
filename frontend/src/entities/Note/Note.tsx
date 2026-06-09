@@ -8,11 +8,11 @@ interface NoteCardProps {
 export function Note({ note }: NoteCardProps) {
   return (
     <div className={`${styles.card} flex flex-col gap-3 p-5 cursor-pointer`}>
-      <h3 className={`${styles.title} font-semibold`} style={{ fontSize: "17px" }}>
+      <h3 className={`${styles.title} ${styles.titleSize} font-semibold`}>
         {note.title}
       </h3>
       <p className={`${styles.preview} text-sm leading-relaxed`}>
-        {note.content.slice(0, 120)}...
+        {note.content.length > 120 ? note.content.slice(0, 120) + "..." : note.content}
       </p>
       <div className="flex items-center justify-between gap-2">
         <div className="flex flex-wrap gap-1.5">
@@ -23,7 +23,7 @@ export function Note({ note }: NoteCardProps) {
           ))}
         </div>
         <span className={`${styles.date} text-xs shrink-0`}>
-          {new Date(note.created_at).toLocaleDateString("ru-RU")}
+          {new Date(note.created_at).toLocaleDateString("en-US")}
         </span>
       </div>
     </div>

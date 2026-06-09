@@ -9,6 +9,8 @@ import { NotFound } from "@/shared/ui/NotFound";
 import { ViewNoteSkeleton } from "@/shared/ui/Skeleton/ViewNoteSkeleton";
 import { withMinDelay } from "@/shared/lib/withMinDelay";
 import { useState } from "react";
+import { ErrorLabel } from "@/shared/ui/ErrorLabel/ErrorLabel";
+import { getErrorMessage } from "@/shared/lib/getErrorMessage";
 
 function calcReadTime(content: string): string {
   const words = content.trim().split(/\s+/).length;
@@ -21,15 +23,14 @@ export function ViewNote() {
 
   const navigate = useNavigate();
   const { id } = useParams();
-  const { note, loading } = useNote(id);
+  const { note, loading, error: loadError } = useNote(id);
 
   const handleRemove = async () => {
     try {
       await withMinDelay(notes_api.remove(Number(id)));
       navigate("/notes");
-    } catch (e: any) {
-      const errorMessage = e.response?.data?.message ?? "Something went wrong.";
-      setError(errorMessage);
+    } catch (e) {
+      setError(getErrorMessage(e));
     }
   };
 
@@ -37,7 +38,7 @@ export function ViewNote() {
   if (loading)
     return (
       <div className="flex flex-col gap-6">
-        <BackArrow navigate="/notes" />
+        <BackArrow navigateTo="/notes" />
         <ViewNoteSkeleton />
       </div>
     );
@@ -51,7 +52,7 @@ export function ViewNote() {
 
   return (
     <div className="flex flex-col gap-6">
-      <BackArrow navigate="/notes" />
+      <BackArrow navigateTo="/notes" />
 
       <article className={styles.article}>
         {/* Meta */}
@@ -98,7 +99,7 @@ export function ViewNote() {
           >
             Delete
           </button>
-          {error && <span className={styles.errorLabel}>{error}</span>}
+          <ErrorLabel error={error || loadError} />
         </div>
       </article>
     </div>

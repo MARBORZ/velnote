@@ -39,7 +39,7 @@ export function TagInput({ tags, onChange }: TagInputProps) {
       {tags.length >= 5 && (
         <span className={styles.warning}>Max 5 tags reached</span>
       )}
-    <div className={styles.wrapper}>
+      <div className={styles.wrapper}>
       {tags.map((t, i) => (
         <div key={`${t}-${i}`} className={styles.chip}>
           <span>{t}</span>
@@ -60,7 +60,7 @@ export function TagInput({ tags, onChange }: TagInputProps) {
         placeholder="Add tag..."
         onChange={(e) => handleInput(e)}
       />
-    </div>
+      </div>
     </div>
   );
 }
