@@ -1,6 +1,6 @@
 # Velnote
 
-A minimalist note-taking app — write in Markdown, organize with tags, search instantly.
+A minimalist note-taking app — write in Markdown, organize with tags.
 
 > Fullstack pet project: React 19 + Express + PostgreSQL
 
