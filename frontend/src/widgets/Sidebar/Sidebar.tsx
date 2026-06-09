@@ -78,7 +78,7 @@ export function Sidebar({ open = false, onClose }: SidebarProps) {
             <div className={styles.userRow}>
               <div className={styles.avatar}>{user.email?.[0]?.toUpperCase() ?? "U"}</div>
               <div className={styles.userInfo}>
-                <span className={styles.userName}>User</span>
+                <span className={styles.userName}>{user.role ?? "User"}</span>
                 <span className={styles.userEmail}>{user.email}</span>
               </div>
             </div>
