@@ -10,8 +10,7 @@ A minimalist note-taking app — write in Markdown, organize with tags, search i
 
 - ✍️ Create, edit and delete notes with live Markdown preview
 - 🏷️ Tag system — up to 5 tags per note, space to confirm
-- 🔍 Search by title and tags simultaneously
-- ♾️ Infinite scroll with cursor-based pagination
+- 🔍 Client-side search by title and tags
 - 🌙 Dark / Light mode
 - 📱 Fully responsive — mobile, tablet, desktop
 - 🔐 JWT authentication with protected routes
