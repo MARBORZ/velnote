@@ -14,6 +14,7 @@ export function Sidebar({ open = false, onClose }: SidebarProps) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const user = useUser();
+  const role = user.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : "User";
 
   const isNotesActive =
     pathname === "/notes" ||
@@ -78,7 +79,7 @@ export function Sidebar({ open = false, onClose }: SidebarProps) {
             <div className={styles.userRow}>
               <div className={styles.avatar}>{user.email?.[0]?.toUpperCase() ?? "U"}</div>
               <div className={styles.userInfo}>
-                <span className={styles.userName}>{user.role ?? "User"}</span>
+                <span className={styles.userName}>{role}</span>
                 <span className={styles.userEmail}>{user.email}</span>
               </div>
             </div>
