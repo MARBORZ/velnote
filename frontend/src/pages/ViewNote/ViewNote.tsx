@@ -7,6 +7,8 @@ import { notes_api } from "@/shared/api/notes";
 import { useNote } from "@/shared/hooks/useNote";
 import { NotFound } from "@/shared/ui/NotFound";
 import { ViewNoteSkeleton } from "@/shared/ui/Skeleton/ViewNoteSkeleton";
+import { withMinDelay } from "@/shared/lib/withMinDelay";
+import { useState } from "react";
 
 function calcReadTime(content: string): string {
   const words = content.trim().split(/\s+/).length;
@@ -15,22 +17,30 @@ function calcReadTime(content: string): string {
 }
 
 export function ViewNote() {
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
   const { id } = useParams();
   const { note, loading } = useNote(id);
 
   const handleRemove = async () => {
-    await notes_api.remove(Number(id));
-    navigate("/notes");
+    try {
+      await withMinDelay(notes_api.remove(Number(id)));
+      navigate("/notes");
+    } catch (e: any) {
+      const errorMessage = e.response?.data?.message ?? "Something went wrong.";
+      setError(errorMessage);
+    }
   };
 
   if (!id) return <NotFound />;
-  if (loading) return (
-    <div className="flex flex-col gap-6">
-      <BackArrow navigate="/notes" />
-      <ViewNoteSkeleton />
-    </div>
-  );
+  if (loading)
+    return (
+      <div className="flex flex-col gap-6">
+        <BackArrow navigate="/notes" />
+        <ViewNoteSkeleton />
+      </div>
+    );
   if (!note) return <NotFound />;
 
   const dateStr = new Date(note.created_at).toLocaleDateString("en-US", {
@@ -66,7 +76,9 @@ export function ViewNote() {
         {note.tags.length > 0 && (
           <div className={styles.tagRow}>
             {note.tags.map((tag) => (
-              <span key={tag} className={styles.tag}>#{tag}</span>
+              <span key={tag} className={styles.tag}>
+                #{tag}
+              </span>
             ))}
           </div>
         )}
@@ -86,6 +98,7 @@ export function ViewNote() {
           >
             Delete
           </button>
+          {error && <span className={styles.errorLabel}>{error}</span>}
         </div>
       </article>
     </div>

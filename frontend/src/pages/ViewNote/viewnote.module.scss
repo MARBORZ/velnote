@@ -96,7 +96,18 @@
 
 .actions {
   display: flex;
+  align-items: center;
   gap: $space-3;
+}
+
+.errorLabel {
+  font-size: $font-sm;
+  font-weight: $font-medium;
+  color: $color-error;
+
+  :global(html.dark) & {
+    color: $dark-error;
+  }
 }
 
 .editBtn {
