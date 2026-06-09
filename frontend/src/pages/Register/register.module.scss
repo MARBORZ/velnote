@@ -128,6 +128,17 @@
   font-size: $font-xs;
 }
 
+.errorLabel {
+  color: $color-error;
+  font-size: $font-xs;
+  font-weight: $font-medium;
+  text-align: center;
+
+  :global(html.dark) & {
+    color: $dark-error;
+  }
+}
+
 .footer {
   font-size: 0.8125rem;
   color: $color-text-tertiary;

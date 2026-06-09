@@ -9,8 +9,9 @@ export function Register() {
 
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const passwordMismatch =
-    password !== checkPassword && checkPassword.length > 0 && checkPassword.length < 6;
+    password !== checkPassword && checkPassword.length > 0;
 
   const handleSubmit = async (formData: FormData) => {
     const email = formData.get("email") as string;
@@ -26,7 +27,13 @@ export function Register() {
         style={{ maxWidth: "420px", padding: "40px" }}
       >
         {/* Logo icon */}
-        <img src={logoIcon} alt="Velnote" width={48} height={48} className={styles.logoIcon} />
+        <img
+          src={logoIcon}
+          alt="Velnote"
+          width={48}
+          height={48}
+          className={styles.logoIcon}
+        />
 
         {/* Header */}
         <div className="flex flex-col items-center gap-2 w-full text-center">
@@ -37,7 +44,9 @@ export function Register() {
         {/* Form */}
         <form className="flex flex-col gap-4 w-full" action={handleSubmit}>
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="email" className={styles.label}>Email</label>
+            <label htmlFor="email" className={styles.label}>
+              Email
+            </label>
             <input
               id="email"
               type="email"
@@ -49,7 +58,9 @@ export function Register() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="password" className={styles.label}>Password</label>
+            <label htmlFor="password" className={styles.label}>
+              Password
+            </label>
             <input
               id="password"
               type="password"
@@ -62,7 +73,9 @@ export function Register() {
           </div>
 
           <div className="flex flex-col gap-1.5">
-            <label htmlFor="confirmPassword" className={styles.label}>Confirm Password</label>
+            <label htmlFor="confirmPassword" className={styles.label}>
+              Confirm Password
+            </label>
             <input
               id="confirmPassword"
               type="password"
@@ -75,7 +88,13 @@ export function Register() {
           </div>
 
           {passwordMismatch && (
-            <span className={`${styles.passwordError} text-sm`}>The passwords don't match.</span>
+            <span className={`${styles.passwordError} text-sm`}>
+              The passwords don't match.
+            </span>
+          )}
+
+          {error && (
+            <span className={styles.errorLabel}>{error}</span>
           )}
 
           <button
@@ -90,7 +109,9 @@ export function Register() {
         {/* Footer */}
         <p className={styles.footer}>
           Already have an account?{" "}
-          <Link to="/login" className={styles.footerLink}>Sign in</Link>
+          <Link to="/login" className={styles.footerLink}>
+            Sign in
+          </Link>
         </p>
       </div>
     </main>
