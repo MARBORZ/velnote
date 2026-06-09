@@ -13,6 +13,7 @@ interface NoteFormProps {
   title: string;
   content: string;
   tags: string[];
+  error?: string;
   setTitle: (title: string) => void;
   setContent: (content: string) => void;
   setTags: (tags: string[]) => void;
@@ -26,6 +27,7 @@ export function NoteForm({
   title,
   content,
   tags,
+  error,
   setTitle,
   setContent,
   setTags,
@@ -72,6 +74,7 @@ export function NoteForm({
           </div>
 
           {/* Actions */}
+          {error && <span className={styles.errorLabel}>{error}</span>}
           <div className="flex gap-3">
             <button
               type="button"
