@@ -1,3 +1,13 @@
+# Environment variables
+.env
+.env.local
+.env.production
+.env.*
+
+# Seed files
+seed.sql
+seed2.sql
+
 # Logs
 logs
 *.log
