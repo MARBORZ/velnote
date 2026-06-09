@@ -11,7 +11,8 @@ import { BackArrow } from "@/shared/ui/BackArrow/BackArrow";
 export function EditNote() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { note, loading } = useNote(id);
+  const { note, loading, error: loadError } = useNote(id);
+  const [submitError, setSubmitError] = useState("");
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -26,19 +27,27 @@ export function EditNote() {
   }, [note]);
 
   if (!id) return <NotFound />;
-  if (loading) return (
-    <div className="flex flex-col gap-6 h-full">
-      <BackArrow navigate="/notes" label="Back to note" />
-      <NoteFormSkeleton />
-    </div>
-  );
+  if (loading)
+    return (
+      <div className="flex flex-col gap-6 h-full">
+        <BackArrow navigate="/notes" label="Back to note" />
+        <NoteFormSkeleton />
+      </div>
+    );
   if (!note) return <NotFound />;
 
   const handleSubmit = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (!title || !content || !tags.length) return;
-    await withMinDelay(notes_api.update(+id, title, content, tags));
-    navigate("/notes");
+
+    try {
+      await withMinDelay(notes_api.update(+id, title, content, tags));
+      navigate("/notes");
+    } catch (e: any) {
+      const errorMessage =
+        e?.response?.data?.message ?? "Something went wrong.";
+      return setSubmitError(errorMessage);
+    }
   };
 
   return (
@@ -53,6 +62,7 @@ export function EditNote() {
       setContent={setContent}
       setTags={setTags}
       submit={handleSubmit}
+      error={loadError || submitError}
     />
   );
 }
