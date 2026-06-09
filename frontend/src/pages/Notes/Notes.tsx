@@ -8,11 +8,13 @@ import { CirclePlus } from "lucide-react";
 import styles from "./notes.module.scss";
 import { EmptyState } from "@/shared/ui/EmptyState/EmptyState";
 import { NoteCardSkeleton } from "@/shared/ui/Skeleton/NoteCardSkeleton";
+import { withMinDelay } from "@/shared/lib/withMinDelay";
 
 export function Notes() {
   const [notes, setNotes] = useState<TNote[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [error, setError] = useState("");
 
   const filteredNotes = notes.filter(
     (n) =>
@@ -23,10 +25,16 @@ export function Notes() {
   );
 
   useEffect(() => {
-    notes_api.getAll().then((res) => {
-      setNotes(res.data.notes);
+    try {
+      withMinDelay(notes_api.getAll()).then((res) => {
+        setNotes(res.data.notes);
+      });
+    } catch (e: any) {
+      const errorMessage = e.response?.data?.message ?? "Something went wrong.";
+      setError(errorMessage);
+    } finally {
       setLoading(false);
-    });
+    }
   }, []);
 
   return (
@@ -42,6 +50,9 @@ export function Notes() {
 
       {/* Search */}
       <SearchBar onSearch={setSearch} />
+
+      {/* Error */}
+      {error && <span className={styles.errorLabel}>{error}</span>}
 
       {/* Cards */}
       {loading ? (
