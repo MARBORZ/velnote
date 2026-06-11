@@ -1,6 +1,11 @@
 @use "tokens" as *;
 
 .page {
+  @media (max-width: 540px) {
+    align-items: center;
+    justify-content: flex-start;
+  }
+
   background: $color-bg-secondary;
   min-height: 100vh;
 
@@ -14,6 +19,20 @@
   border: 1px solid $color-border;
   border-radius: $radius-2xl;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+  max-width: 520px;
+  width: 100%;
+  padding: 48px;
+
+  @media (max-width: 540px) {
+    padding: 32px 24px;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    max-width: 100%;
+    width: 100%;
+    min-height: 100vh;
+    justify-content: center;
+  }
 
   :global(html.dark) & {
     background: $dark-bg-card;
