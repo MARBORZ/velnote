@@ -12,15 +12,15 @@ export function Layout({ children }: LayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex h-screen overflow-hidden">
       <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 min-h-0 overflow-hidden">
         {/* Mobile top bar */}
         <TopBar onMenuClick={() => setSidebarOpen(true)} />
 
         {/* Main content */}
-        <main className="flex-1 flex flex-col py-8 px-10 max-md:px-4 max-md:py-5 max-md:pb-28">
+        <main className="flex-1 overflow-y-auto py-8 px-10 max-md:px-4 max-md:py-5 max-md:pb-28">
           {children}
         </main>
       </div>

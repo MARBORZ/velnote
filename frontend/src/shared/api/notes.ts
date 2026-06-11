@@ -1,8 +1,8 @@
 import { api } from "./api";
 
 export const notes_api = {
-  getAll: () => {
-    return api.get("/api/notes");
+  getAll: (cursor?: number | null) => {
+    return api.get("/api/notes", { params: cursor ? { cursor } : {} });
   },
 
   getById: (id: number) => {
