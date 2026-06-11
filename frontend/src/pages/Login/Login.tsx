@@ -27,7 +27,6 @@ export function Login() {
     <main className={`${styles.page} flex items-center justify-center`}>
       <div
         className={`${styles.card} w-full flex flex-col items-center gap-7`}
-        style={{ maxWidth: "420px", padding: "40px" }}
       >
         {/* Logo icon */}
         <img
@@ -74,7 +73,7 @@ export function Login() {
             />
           </div>
 
-          <ErrorLabel error={error} />
+          <ErrorLabel error={error} className="text-center" />
 
           <button
             type="submit"

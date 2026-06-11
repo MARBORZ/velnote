@@ -13,7 +13,7 @@ const registerUser: RequestHandler = async (req, res) => {
   const result = userSchema.safeParse(req.body);
 
   if (!result.success)
-    return res.status(400).json({ message: "Fail to register." });
+    return res.status(400).json({ message: "Invalid registration data. Please provide a valid email and a password with at least 6 characters." });
 
   const { email, password } = result.data;
 
@@ -44,7 +44,7 @@ const registerUser: RequestHandler = async (req, res) => {
 
   const user = rows[0];
 
-  if (!user) return res.status(500).json({ message: "Failed to create user." });
+  if (!user) return res.status(500).json({ message: "User was created but could not be retrieved. Please try logging in." });
 
   const { password: _, ...safeUser } = user;
 
@@ -60,7 +60,7 @@ const loginUser: RequestHandler = async (req, res) => {
   const result = userSchema.safeParse(req.body);
 
   if (!result.success)
-    return res.status(400).json({ message: "Fail to login." });
+    return res.status(400).json({ message: "Invalid login data. Please provide a valid email and password." });
 
   const { email, password } = result.data;
 
@@ -70,7 +70,7 @@ const loginUser: RequestHandler = async (req, res) => {
   );
 
   const user = rows[0];
-  if (!user) return res.status(404).json({ message: "No user found." });
+  if (!user) return res.status(404).json({ message: "No account found with this email address. Please check your email or create a new account." });
 
   const comparePassword = await bcrypt.compare(password, user?.password);
   if (comparePassword) {
@@ -89,7 +89,7 @@ const loginUser: RequestHandler = async (req, res) => {
     });
   } else {
     return res.status(401).json({
-      message: "Failed to login. Check password or email.",
+      message: "Incorrect password. Please double-check your credentials and try again.",
     });
   }
 };
