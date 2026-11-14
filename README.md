@@ -1,5 +1,7 @@
 # velnote
 
+English · [Norsk](README.no.md)
+
 Notes app – write in Markdown, organize with tags. Fullstack pet project.
 
 - `frontend/` – React 19, TypeScript, Tailwind, react-markdown
